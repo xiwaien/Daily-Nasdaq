@@ -20,8 +20,12 @@ from analyze_treasury_spread import run_spread_pipeline
 from fetch_nasdaq_data import collect_all
 from glossary_manager import infer_glossary_for_text, load_ignored_terms
 
-BASE_DIR = Path(__file__).resolve().parent
-BRIEFING_DIR = BASE_DIR / "资讯栏目"
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT_DIR = SCRIPT_DIR.parent
+REPORT_DIR = ROOT_DIR / "每日投研报告"
+DASHBOARD_DIR = ROOT_DIR / "交互式看板"
+BRIEFING_DIR = ROOT_DIR / "资讯栏目"
+SNAPSHOT_DIR = BRIEFING_DIR / "原始快照"
 
 WEEKDAY_CN = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
 
@@ -263,7 +267,7 @@ def build_official_briefing_md(
         "",
         "## 五、初学者政策与金融术语通俗解读",
         "",
-        f"> 系统已自动扫描本篇官方资讯并提取可能较难理解的专业名词（当前免解释屏蔽词数：**{len(ignored)}** 个；如需屏蔽已掌握名词，可直接告知我或运行 `python glossary_manager.py --ignore 名词`）。",
+        f"> 系统已自动扫描本篇官方资讯并提取可能较难理解的专业名词（当前免解释屏蔽词数：**{len(ignored)}** 个；如需屏蔽已掌握名词，可直接告知我或运行 `python 算法与配置/glossary_manager.py --ignore 名词`）。",
         "",
     ])
     if glossary_items:
@@ -343,10 +347,10 @@ def build_daily_report_md(
     for note in ms.get("summary_notes_cn", []):
         lines.append(f"- {note}")
     lines.append(
-        f"- **长短期国债利差可视化专刊**：已同步生成最新长短端收益率与期限利差走势图及全期限曲线分析（详见专题报告 [{tdate}_美债期限利差专题分析.md](资讯栏目/{tdate}_美债期限利差专题分析.md) 与交互看板 [美债期限利差看板.html](美债期限利差看板.html)）。"
+        f"- **长短期国债利差可视化专刊**：已同步生成最新长短端收益率与期限利差走势图及全期限曲线分析（详见专题报告 [{tdate}_美债期限利差专题分析.md](../国债利差专题/{tdate}_美债期限利差专题分析.md) 与交互看板 [美债期限利差看板.html](../交互式看板/美债期限利差看板.html)）。"
     )
     lines.append("")
-    lines.append(f"![美债长短期收益率与期限利差全景监测图](资讯栏目/{tdate}_美债长短期利差走势图.png)")
+    lines.append(f"![美债长短期收益率与期限利差全景监测图](../国债利差专题/{tdate}_美债长短期利差走势图.png)")
 
     lines.extend([
         "",
@@ -1303,10 +1307,13 @@ def main() -> None:
         payload = collect_all()
 
     tdate = payload["latest_trading_date"]
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    DASHBOARD_DIR.mkdir(parents=True, exist_ok=True)
     BRIEFING_DIR.mkdir(parents=True, exist_ok=True)
+    SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # 1. 保存官方信源原始结构化快照
-    snapshot_path = BRIEFING_DIR / f"{tdate}_官方信源原始快照.json"
+    # 1. 保存官方信源原始结构化快照至《资讯栏目/原始快照/》
+    snapshot_path = SNAPSHOT_DIR / f"{tdate}_官方信源原始快照.json"
     snapshot_path.write_text(
         json.dumps(
             {
@@ -1327,14 +1334,14 @@ def main() -> None:
     briefing_path = BRIEFING_DIR / f"{tdate}_官方宏观与政策资讯.md"
     briefing_path.write_text(briefing_md, encoding="utf-8")
 
-    # 3. 生成主报告《YYYY-MM-DD.md》与交互看板《YYYY-MM-DD.html》
-    rel_briefing = f"资讯栏目/{tdate}_官方宏观与政策资讯.md"
+    # 3. 生成主报告《每日投研报告/YYYY-MM-DD.md》与交互看板《交互式看板/YYYY-MM-DD.html》
+    rel_briefing = f"../资讯栏目/{tdate}_官方宏观与政策资讯.md"
     report_md, glossary_items = build_daily_report_md(payload, narrative, rel_briefing)
-    md_path = BASE_DIR / f"{tdate}.md"
+    md_path = REPORT_DIR / f"{tdate}.md"
     md_path.write_text(report_md, encoding="utf-8")
 
     html_str = build_dashboard_html(payload, narrative, glossary_items)
-    html_path = BASE_DIR / f"{tdate}.html"
+    html_path = DASHBOARD_DIR / f"{tdate}.html"
     html_path.write_text(html_str, encoding="utf-8")
 
     # 4. 同步运行美债长短期期限利差计算与可视化算法

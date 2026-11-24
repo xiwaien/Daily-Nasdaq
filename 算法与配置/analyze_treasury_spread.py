@@ -32,8 +32,10 @@ import matplotlib.pyplot as plt
 
 from glossary_manager import infer_glossary_for_text, load_ignored_terms
 
-BASE_DIR = Path(__file__).resolve().parent
-BRIEFING_DIR = BASE_DIR / "资讯栏目"
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT_DIR = SCRIPT_DIR.parent
+SPREAD_DIR = ROOT_DIR / "国债利差专题"
+DASHBOARD_DIR = ROOT_DIR / "交互式看板"
 
 # 配置 Matplotlib 中文字体（Windows 优先使用微软雅黑，兼顾黑体回退，解决负号显示）
 plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
@@ -611,6 +613,9 @@ def build_interactive_spread_html(dataset: dict[str, Any], glossary_items: list[
         <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
           美元指数：{dataset["anchor_dxy"]:.2f}
         </span>
+        <a href="{tdate}.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--primary,#3b82f6)] text-[var(--primary,#3b82f6)] bg-[var(--background,#0b0f19)] hover:opacity-80">
+          &larr; 返回每日科技投研看板
+        </a>
       </div>
     </header>
 
@@ -1004,21 +1009,22 @@ def build_interactive_spread_html(dataset: dict[str, Any], glossary_items: list[
 
 
 def run_spread_pipeline() -> dict[str, Any]:
-    """执行美债长短期利差计算并输出 PNG 图表、专题 Markdown 与交互式 HTML 看板。"""
+    """执行美债长短期利差计算并输出至《国债利差专题》与《交互式看板》目录。"""
     dataset = collect_yield_spread_dataset()
     tdate = dataset["latest_date"]
-    BRIEFING_DIR.mkdir(parents=True, exist_ok=True)
+    SPREAD_DIR.mkdir(parents=True, exist_ok=True)
+    DASHBOARD_DIR.mkdir(parents=True, exist_ok=True)
 
     png_filename = f"{tdate}_美债长短期利差走势图.png"
-    png_path = BRIEFING_DIR / png_filename
+    png_path = SPREAD_DIR / png_filename
     render_matplotlib_png(dataset, png_path)
 
     md_text, glossary_items = build_spread_markdown(dataset, png_filename)
-    md_path = BRIEFING_DIR / f"{tdate}_美债期限利差专题分析.md"
+    md_path = SPREAD_DIR / f"{tdate}_美债期限利差专题分析.md"
     md_path.write_text(md_text, encoding="utf-8")
 
     html_text = build_interactive_spread_html(dataset, glossary_items)
-    html_path = BASE_DIR / "美债期限利差看板.html"
+    html_path = DASHBOARD_DIR / "美债期限利差看板.html"
     html_path.write_text(html_text, encoding="utf-8")
 
     return {
