@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Tech &amp; Nasdaq Morning Desk Brief — 2026-11-23</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg-fallback: #0b0f19;
+      --card-fallback: #111827;
+      --fg-fallback: #f3f4f6;
+      --muted-fallback: #9ca3af;
+      --border-fallback: #1f2937;
+      --primary-fallback: #3b82f6;
+      --primary-fg-fallback: #ffffff;
+      --success-fallback: #10b981;
+      --error-fallback: #ef4444;
+      --warning-fallback: #f59e0b;
+    }
+    body {
+      background-color: var(--background, var(--bg-fallback));
+      color: var(--foreground, var(--fg-fallback));
+    }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: var(--foreground, var(--fg-fallback)); }
+  </style>
+</head>
+<body class="bg-[var(--background,#0b0f19)] text-[var(--foreground,#f3f4f6)] antialiased p-4 md:p-6">
+  <div class="max-w-7xl mx-auto space-y-5">
+
+    <!-- Institutional Header -->
+    <header class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-[var(--muted-foreground,#9ca3af)] font-semibold">
+          <span>US TMT Equity Research &amp; Quantitative Desk</span>
+          <span>•</span>
+          <span>Daily Market Brief</span>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold mt-1">纳斯达克指数与美股核心科技股每日投研报表</h1>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mt-1">
+          交易日（美东）：<span class="font-mono text-[var(--foreground,#f3f4f6)]">2026-11-23</span> &nbsp;|&nbsp;
+          样本覆盖：4 大基准指数 + 19 家纳斯达克核心科技企业 &nbsp;|&nbsp;
+          数据口径：Yahoo Finance 日线收盘及 20/50 日均线量化统计
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--success,#10b981)] text-[var(--success,#10b981)] bg-[var(--background,#0b0f19)]">
+          市场状态：Risk-On / 史诗级空头回补
+        </span>
+        <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--border,#1f2937)] text-[var(--foreground,#f3f4f6)] bg-[var(--background,#0b0f19)]">
+          样本涨跌比：18 涨 / 1 跌
+        </span>
+      </div>
+    </header>
+
+    <!-- Index KPI Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="index-cards"></section>
+
+    <!-- Visual Charts Row -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <!-- Diverging Bar Chart (8 cols) -->
+      <div class="lg:col-span-8 bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 flex flex-col">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[var(--border,#1f2937)]">
+          <div>
+            <h2 class="text-base font-bold">核心科技股涨跌幅与均线偏离排行榜</h2>
+            <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">点击右侧维度切换排序视图，直观对比个股强弱分化</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="metric-tabs">
+            <button data-metric="chg_1d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]">单日涨跌</button>
+            <button data-metric="chg_5d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">近5日</button>
+            <button data-metric="chg_20d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">近20日</button>
+            <button data-metric="dist_ma20" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">较20MA偏离</button>
+            <button data-metric="dist_ma50" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">较50MA偏离</button>
+          </div>
+        </div>
+        <div id="diverging-chart" class="mt-4 space-y-2"></div>
+      </div>
+
+      <!-- Sub-sector & Volume Anomaly Panel (4 cols) -->
+      <div class="lg:col-span-4 space-y-4">
+        <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+          <h2 class="text-base font-bold">子板块等权表现对比</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mb-3">单日 vs 近 5 日平均涨跌幅</p>
+          <div id="sector-chart" class="space-y-3"></div>
+        </div>
+
+        <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+          <h2 class="text-base font-bold">成交量异动雷达（20日量比 &ge; 1.25x）</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mb-3">识别机构资金集中买入或抛售标的</p>
+          <div id="volume-radar" class="space-y-2.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Desk Commentary Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 space-y-1.5">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[var(--success,#10b981)]">核心催化 • 算力与半导体</div>
+        <h3 class="text-sm font-bold">黄仁勋复职引爆 NVDA +31.48%，费半飙涨 14%</h3>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed">
+          NVIDIA 董事会获美政府“无国安风险”背书后立即恢复黄仁勋 CEO 职务，单日市值激增约 9,500 亿美元（RVol 2.71x）。^SOX 暴涨 14.03%，MU（+19.04%）、INTC（+16.34%）放量领涨。
+        </p>
+      </div>
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 space-y-1.5">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[var(--error,#ef4444)]">个股黑天鹅 • 网络安全</div>
+        <h3 class="text-sm font-bold">CRWD 4.59x 天量重挫 -8.92%（439亿收购 ZS）</h3>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed">
+          CrowdStrike Q3 营收 15.8 亿美元、净新增 ARR 4.19 亿美元均超预期，但同步宣布 439 亿美元全股票收购 Zscaler（增发约 19% 股本），稀释焦虑引发天量抛售，成全样本唯一收跌标的。
+        </p>
+      </div>
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 space-y-1.5">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground,#9ca3af)]">技术与宏观 • 均线检验</div>
+        <h3 class="text-sm font-bold">VIX 暴跌 25.8% 至 26.62，关注 20MA 阻力与 PCE</h3>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed">
+          尽管日内上涨广度达 94.7%，但样本中 84.2% 个股仍处 20MA 与 50MA 下方（仅 AAPL、TSLA 站稳三线）。感恩节周关注周三 Q3 GDP 修正值与 PCE 通胀数据对 4.92% 美债收益率的影响。
+        </p>
+      </div>
+    </section>
+
+    <!-- Full Interactive Equity Table -->
+    <section class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-[var(--border,#1f2937)]">
+        <div>
+          <h2 class="text-base font-bold">核心纳斯达克科技股量化明细表</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">支持按子板块筛选与点击表头排序</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5" id="sector-filters">
+          <button data-sector="ALL" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]">全部 (19)</button>
+          <button data-sector="Mega-Cap Tech" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">科技七巨头 (7)</button>
+          <button data-sector="Semiconductors" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">半导体 (6)</button>
+          <button data-sector="Software & Growth" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">软件与安全 (6)</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto mt-3">
+        <table class="w-full text-xs text-left border-collapse">
+          <thead>
+            <tr class="border-b border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">
+              <th class="py-2.5 px-2 font-semibold">代码 / 名称</th>
+              <th class="py-2.5 px-2 font-semibold">板块</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="close">收盘价($)</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_1d">单日涨跌</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_5d">近5日</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_20d">近20日</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_ma20">较20MA</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_ma50">较50MA</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="rel_vol">20日量比</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="ann_vol">年化波动率</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_52w">距52周高点</th>
+            </tr>
+          </thead>
+          <tbody id="equity-tbody" class="divide-y divide-[var(--border,#1f2937)]"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const INDICES = [
+      { symbol: "^IXIC", name: "纳斯达克综合指数", close: 24089.56, chg_1d: 6.51, chg_5d: -1.71, chg_20d: -7.95, dist_ma50: -7.60, rel_vol: 1.02, dist_52w: -13.11 },
+      { symbol: "^NDX", name: "纳斯达克100指数", close: 26746.10, chg_1d: 6.86, chg_5d: -1.66, chg_20d: -8.63, dist_ma50: -8.33, rel_vol: 0.26, dist_52w: -14.72 },
+      { symbol: "^SOX", name: "费城半导体指数", close: 9588.05, chg_1d: 14.03, chg_5d: -0.24, chg_20d: -13.49, dist_ma50: -15.18, rel_vol: null, dist_52w: -34.58 },
+      { symbol: "^GSPC", name: "标普500指数 (基准)", close: 7237.17, chg_1d: 4.73, chg_5d: -2.42, chg_20d: -5.73, dist_ma50: -4.99, rel_vol: 0.75, dist_52w: -7.74 }
+    ];
+
+    const STOCKS = [
+      { symbol: "AAPL", name: "Apple", sector: "Mega-Cap Tech", close: 349.08, chg_1d: 1.90, chg_5d: -1.05, chg_20d: 1.50, dist_ma20: 0.39, dist_ma50: 2.03, rel_vol: 1.18, ann_vol: 28.86, dist_52w: -3.26 },
+      { symbol: "MSFT", name: "Microsoft", sector: "Mega-Cap Tech", close: 492.50, chg_1d: 1.65, chg_5d: -4.92, chg_20d: -7.53, dist_ma20: -5.46, dist_ma50: -5.21, rel_vol: 1.01, ann_vol: 38.58, dist_52w: -11.92 },
+      { symbol: "NVDA", name: "NVIDIA", sector: "Mega-Cap Tech", close: 165.05, chg_1d: 31.48, chg_5d: 5.71, chg_20d: -23.59, dist_ma20: -7.75, dist_ma50: -19.91, rel_vol: 2.71, ann_vol: 136.91, dist_52w: -32.18 },
+      { symbol: "AMZN", name: "Amazon", sector: "Mega-Cap Tech", close: 255.39, chg_1d: 3.47, chg_5d: -0.92, chg_20d: 2.53, dist_ma20: -0.91, dist_ma50: 0.13, rel_vol: 1.00, ann_vol: 45.72, dist_52w: -11.08 },
+      { symbol: "GOOGL", name: "Alphabet", sector: "Mega-Cap Tech", close: 282.10, chg_1d: 6.34, chg_5d: -0.57, chg_20d: -10.95, dist_ma20: -1.95, dist_ma50: -12.11, rel_vol: 0.98, ann_vol: 59.16, dist_52w: -30.96 },
+      { symbol: "META", name: "Meta Platforms", sector: "Mega-Cap Tech", close: 597.60, chg_1d: 6.55, chg_5d: -4.60, chg_20d: -5.23, dist_ma20: -3.13, dist_ma50: -11.51, rel_vol: 0.88, ann_vol: 47.55, dist_52w: -23.37 },
+      { symbol: "TSLA", name: "Tesla", sector: "Mega-Cap Tech", close: 385.46, chg_1d: 11.46, chg_5d: 1.51, chg_20d: -1.57, dist_ma20: 0.25, dist_ma50: 2.47, rel_vol: 1.28, ann_vol: 74.18, dist_52w: -22.73 },
+      { symbol: "AVGO", name: "Broadcom", sector: "Semiconductors", close: 313.55, chg_1d: 3.00, chg_5d: -5.95, chg_20d: -4.75, dist_ma20: -5.44, dist_ma50: -8.34, rel_vol: 1.35, ann_vol: 84.61, dist_52w: -36.66 },
+      { symbol: "AMD", name: "AMD", sector: "Semiconductors", close: 453.46, chg_1d: 6.85, chg_5d: -10.08, chg_20d: -14.65, dist_ma20: -10.24, dist_ma50: -17.90, rel_vol: 1.27, ann_vol: 132.97, dist_52w: -31.14 },
+      { symbol: "QCOM", name: "Qualcomm", sector: "Semiconductors", close: 165.38, chg_1d: 10.30, chg_5d: -1.86, chg_20d: -7.92, dist_ma20: -2.22, dist_ma50: -6.57, rel_vol: 1.37, ann_vol: 81.14, dist_52w: -36.37 },
+      { symbol: "MU", name: "Micron", sector: "Semiconductors", close: 707.70, chg_1d: 19.04, chg_5d: -1.57, chg_20d: -21.69, dist_ma20: -8.90, dist_ma50: -22.05, rel_vol: 1.47, ann_vol: 131.80, dist_52w: -43.61 },
+      { symbol: "ASML", name: "ASML Holding", sector: "Semiconductors", close: 1383.78, chg_1d: 9.28, chg_5d: -1.64, chg_20d: -13.02, dist_ma20: -6.61, dist_ma50: -14.63, rel_vol: 1.17, ann_vol: 73.39, dist_52w: -30.81 },
+      { symbol: "INTC", name: "Intel", sector: "Semiconductors", close: 59.66, chg_1d: 16.34, chg_5d: 7.55, chg_20d: -34.06, dist_ma20: -5.84, dist_ma50: -33.32, rel_vol: 1.07, ann_vol: 142.82, dist_52w: -58.09 },
+      { symbol: "NFLX", name: "Netflix", sector: "Software & Growth", close: 58.10, chg_1d: 2.41, chg_5d: -4.36, chg_20d: -9.08, dist_ma20: -6.28, dist_ma50: -13.23, rel_vol: 1.23, ann_vol: 32.90, dist_52w: -47.05 },
+      { symbol: "ADBE", name: "Adobe", sector: "Software & Growth", close: 223.98, chg_1d: 2.88, chg_5d: -8.95, chg_20d: -13.39, dist_ma20: -6.53, dist_ma50: -7.79, rel_vol: 0.98, ann_vol: 32.09, dist_52w: -38.25 },
+      { symbol: "PANW", name: "Palo Alto", sector: "Software & Growth", close: 353.43, chg_1d: 2.94, chg_5d: 11.81, chg_20d: -9.48, dist_ma20: 2.72, dist_ma50: -3.70, rel_vol: 1.31, ann_vol: 70.55, dist_52w: -18.25 },
+      { symbol: "CRWD", name: "CrowdStrike", sector: "Software & Growth", close: 208.97, chg_1d: -8.92, chg_5d: -6.38, chg_20d: -20.19, dist_ma20: -11.25, dist_ma50: -15.23, rel_vol: 4.59, ann_vol: 67.31, dist_52w: -27.19 },
+      { symbol: "PLTR", name: "Palantir", sector: "Software & Growth", close: 159.36, chg_1d: 11.06, chg_5d: -0.64, chg_20d: -19.86, dist_ma20: -6.18, dist_ma50: -12.91, rel_vol: 1.28, ann_vol: 70.93, dist_52w: -25.16 },
+      { symbol: "SNPS", name: "Synopsys", sector: "Software & Growth", close: 426.99, chg_1d: 7.78, chg_5d: -3.25, chg_20d: -6.02, dist_ma20: -5.83, dist_ma50: -4.98, rel_vol: 0.81, ann_vol: 55.29, dist_52w: -20.85 }
+    ];
+
+    const fmtPct = (v) => (v > 0 ? `+${v.toFixed(2)}%` : `${v.toFixed(2)}%`);
+    const pctColor = (v) => (v > 0 ? "text-[var(--success,#10b981)]" : v < 0 ? "text-[var(--error,#ef4444)]" : "text-[var(--muted-foreground,#9ca3af)]");
+
+    // 1. Render Index Cards
+    document.getElementById("index-cards").innerHTML = INDICES.map(idx => `
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 flex flex-col justify-between">
+        <div class="flex items-start justify-between">
+          <div>
+            <div class="text-xs text-[var(--muted-foreground,#9ca3af)] font-medium">${idx.name}</div>
+            <div class="text-xs font-mono text-[var(--muted-foreground,#9ca3af)]">${idx.symbol}</div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold tabular-nums ${pctColor(idx.chg_1d)} border border-[var(--border,#1f2937)]">
+            ${fmtPct(idx.chg_1d)}
+          </span>
+        </div>
+        <div class="text-2xl font-bold tabular-nums mt-2">${idx.close.toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
+        <div class="grid grid-cols-3 gap-1 mt-3 pt-2.5 border-t border-[var(--border,#1f2937)] text-xs tabular-nums">
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">5日</span><span class="${pctColor(idx.chg_5d)} font-medium">${fmtPct(idx.chg_5d)}</span></div>
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">较50MA</span><span class="${pctColor(idx.dist_ma50)} font-medium">${fmtPct(idx.dist_ma50)}</span></div>
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">距高点</span><span class="text-[var(--muted-foreground,#9ca3af)] font-medium">${fmtPct(idx.dist_52w)}</span></div>
+        </div>
+      </div>
+    `).join("");
+
+    // 2. Diverging Bar Chart
+    let currentMetric = "chg_1d";
+    function renderDivergingChart() {
+      const sorted = [...STOCKS].sort((a, b) => b[currentMetric] - a[currentMetric]);
+      const maxAbs = Math.max(...sorted.map(s => Math.abs(s[currentMetric])), 1);
+
+      document.getElementById("diverging-chart").innerHTML = sorted.map(s => {
+        const val = s[currentMetric];
+        const widthPct = (Math.abs(val) / maxAbs) * 48;
+        const isPos = val >= 0;
+        const barColor = isPos ? "bg-[var(--success,#10b981)]" : "bg-[var(--error,#ef4444)]";
+        return `
+          <div class="grid grid-cols-12 items-center gap-2 text-xs">
+            <div class="col-span-3 sm:col-span-2 flex items-center justify-between pr-1">
+              <span class="font-mono font-semibold">${s.symbol}</span>
+              <span class="hidden sm:inline text-[var(--muted-foreground,#9ca3af)] truncate ml-1">${s.name}</span>
+            </div>
+            <div class="col-span-7 sm:col-span-8 relative h-4 flex items-center">
+              <div class="w-full h-px bg-[var(--border,#1f2937)] absolute top-1/2"></div>
+              <div class="w-px h-4 bg-[var(--muted-foreground,#9ca3af)] opacity-40 absolute left-1/2"></div>
+              <div class="h-3 rounded-sm ${barColor} absolute transition-all"
+                   style="${isPos ? `left: 50%; width: ${widthPct}%;` : `right: 50%; width: ${widthPct}%;`}"></div>
+            </div>
+            <div class="col-span-2 text-right font-mono font-semibold tabular-nums ${pctColor(val)}">
+              ${fmtPct(val)}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    document.querySelectorAll(".metric-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentMetric = btn.dataset.metric;
+        document.querySelectorAll(".metric-btn").forEach(b => {
+          b.className = "metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]";
+        });
+        btn.className = "metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]";
+        renderDivergingChart();
+      });
+    });
+
+    // 3. Sector Comparison
+    const sectors = [
+      { key: "Semiconductors", label: "半导体与设备 (Semis)" },
+      { key: "Mega-Cap Tech", label: "科技七巨头 (Mega-Cap)" },
+      { key: "Software & Growth", label: "软件与安全 (Software)" }
+    ];
+    document.getElementById("sector-chart").innerHTML = sectors.map(sec => {
+      const items = STOCKS.filter(s => s.sector === sec.key);
+      const avg1d = items.reduce((a, b) => a + b.chg_1d, 0) / items.length;
+      const avg5d = items.reduce((a, b) => a + b.chg_5d, 0) / items.length;
+      return `
+        <div class="p-3 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>${sec.label}</span>
+            <span class="${pctColor(avg1d)} tabular-nums">1D: ${fmtPct(avg1d)}</span>
+          </div>
+          <div class="flex justify-between items-center text-xs text-[var(--muted-foreground,#9ca3af)] mt-1 tabular-nums">
+            <span>样本数: ${items.length}</span>
+            <span>5D 均值: <strong class="${pctColor(avg5d)}">${fmtPct(avg5d)}</strong></span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // 4. Volume Radar (RVol >= 1.25x)
+    const volAnomalies = [...STOCKS].filter(s => s.rel_vol >= 1.25).sort((a, b) => b.rel_vol - a.rel_vol);
+    document.getElementById("volume-radar").innerHTML = volAnomalies.map(s => `
+      <div class="flex items-center justify-between text-xs p-2 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+        <div>
+          <span class="font-mono font-bold">${s.symbol}</span>
+          <span class="text-[var(--muted-foreground,#9ca3af)] ml-1">${s.name}</span>
+        </div>
+        <div class="flex items-center gap-3 tabular-nums">
+          <span class="font-mono font-semibold text-[var(--warning,#f59e0b)]">${s.rel_vol.toFixed(2)}x</span>
+          <span class="font-mono font-semibold ${pctColor(s.chg_1d)} w-16 text-right">${fmtPct(s.chg_1d)}</span>
+        </div>
+      </div>
+    `).join("");
+
+    // 5. Sortable & Filterable Table
+    let currentSector = "ALL";
+    let sortKey = "chg_1d";
+    let sortAsc = false;
+
+    function renderTable() {
+      const filtered = currentSector === "ALL" ? STOCKS : STOCKS.filter(s => s.sector === currentSector);
+      const sorted = [...filtered].sort((a, b) => sortAsc ? a[sortKey] - b[sortKey] : b[sortKey] - a[sortKey]);
+
+      document.getElementById("equity-tbody").innerHTML = sorted.map(s => `
+        <tr class="hover:bg-[var(--background,#0b0f19)] transition-colors">
+          <td class="py-2.5 px-2">
+            <span class="font-mono font-bold">${s.symbol}</span>
+            <span class="text-[var(--muted-foreground,#9ca3af)] ml-1.5">${s.name}</span>
+          </td>
+          <td class="py-2.5 px-2 text-[var(--muted-foreground,#9ca3af)]">${s.sector}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums">${s.close.toFixed(2)}</td>
+          <td class="py-2.5 px-2 text-right font-mono font-semibold tabular-nums ${pctColor(s.chg_1d)}">${fmtPct(s.chg_1d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.chg_5d)}">${fmtPct(s.chg_5d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.chg_20d)}">${fmtPct(s.chg_20d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.dist_ma20)}">${fmtPct(s.dist_ma20)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.dist_ma50)}">${fmtPct(s.dist_ma50)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${s.rel_vol >= 1.25 ? "font-bold text-[var(--warning,#f59e0b)]" : ""}">${s.rel_vol.toFixed(2)}x</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums text-[var(--muted-foreground,#9ca3af)]">${s.ann_vol.toFixed(1)}%</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums text-[var(--muted-foreground,#9ca3af)]">${fmtPct(s.dist_52w)}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.querySelectorAll(".sector-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentSector = btn.dataset.sector;
+        document.querySelectorAll(".sector-btn").forEach(b => {
+          b.className = "sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]";
+        });
+        btn.className = "sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]";
+        renderTable();
+      });
+    });
+
+    document.querySelectorAll("th.sortable").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.sort;
+        if (sortKey === key) {
+          sortAsc = !sortAsc;
+        } else {
+          sortKey = key;
+          sortAsc = false;
+        }
+        renderTable();
+      });
+    });
+
+    renderDivergingChart();
+    renderTable();
+  </script>
+</body>
+</html>
