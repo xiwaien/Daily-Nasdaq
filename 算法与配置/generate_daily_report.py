@@ -17,6 +17,7 @@ import sys
 from typing import Any
 
 from analyze_treasury_spread import run_spread_pipeline
+from build_portal import build_portal
 from fetch_nasdaq_data import collect_all
 from glossary_manager import infer_glossary_for_text, load_ignored_terms
 
@@ -1344,8 +1345,9 @@ def main() -> None:
     html_path = DASHBOARD_DIR / f"{tdate}.html"
     html_path.write_text(html_str, encoding="utf-8")
 
-    # 4. 同步运行美债长短期期限利差计算与可视化算法
+    # 4. 同步运行美债长短期期限利差计算与可视化算法，并编译统一看板门户 index.html
     spread_res = run_spread_pipeline()
+    portal_path = build_portal()
 
     print(f"[生成完成] 主报告：{md_path}")
     print(f"[生成完成] 交互看板：{html_path}")
@@ -1353,6 +1355,7 @@ def main() -> None:
     print(f"[生成完成] 官方信源快照：{snapshot_path}")
     print(f"[生成完成] 美债利差走势图：{spread_res['png_path']}")
     print(f"[生成完成] 美债利差交互看板：{spread_res['html_path']}")
+    print(f"[生成完成] 统一交互门户主页：{portal_path}")
     print(f"[术语伴读] 本期自动推断并解释专业术语 {len(glossary_items)} 条")
 
 
