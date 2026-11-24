@@ -123,11 +123,11 @@
         "group_cn": "避险与通胀预期",
         "meaning_cn": "衡量央行购金、地缘避险需求及实际利率预期",
         "date": "2026-11-24",
-        "close": 3630.0,
+        "close": 3634.5,
         "prev_close": 3651.4,
-        "diff_1d": -21.4,
-        "chg_1d_pct": -0.59,
-        "chg_5d_pct": -6.06
+        "diff_1d": -16.9,
+        "chg_1d_pct": -0.46,
+        "chg_5d_pct": -5.94
       },
       {
         "symbol": "CL=F",
@@ -135,11 +135,11 @@
         "group_cn": "避险与通胀预期",
         "meaning_cn": "衡量能源通胀输入压力与全球工业活动景气度",
         "date": "2026-11-24",
-        "close": 79.89,
+        "close": 80.0,
         "prev_close": 80.17,
-        "diff_1d": -0.28,
-        "chg_1d_pct": -0.35,
-        "chg_5d_pct": -7.12
+        "diff_1d": -0.17,
+        "chg_1d_pct": -0.21,
+        "chg_5d_pct": -6.99
       },
       {
         "symbol": "BTC-USD",
@@ -147,11 +147,11 @@
         "group_cn": "流动性与风险偏好",
         "meaning_cn": "全天候交易的高弹性风险资产，反映全球投机流动性松紧",
         "date": "2026-11-24",
-        "close": 60219.91,
+        "close": 60283.56,
         "prev_close": 61161.91,
-        "diff_1d": -942.0,
-        "chg_1d_pct": -1.54,
-        "chg_5d_pct": -4.39
+        "diff_1d": -878.35,
+        "chg_1d_pct": -1.44,
+        "chg_5d_pct": -4.29
       },
       {
         "symbol": "^RUT",
@@ -493,11 +493,8 @@
         "name_cn": "英伟达",
         "filing_date": "2026-11-23",
         "form": "8-K",
-        "item_codes": [
-          "5.02",
-          "9.01"
-        ],
-        "items_cn": "董事或核心高级管理人员离任、复职或新任变动",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm"
       },
       {
@@ -505,58 +502,17 @@
         "name_cn": "脸书母公司",
         "filing_date": "2026-11-23",
         "form": "8-K",
-        "item_codes": [
-          "8.01"
-        ],
-        "items_cn": "公司主动披露的其他法定重大事项",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026075541/meta-20261118.htm"
-      },
-      {
-        "symbol": "CRWD",
-        "name_cn": "众击安全",
-        "filing_date": "2026-11-23",
-        "form": "425",
-        "item_codes": [
-          "425"
-        ],
-        "items_cn": "上市公司重大换股并购或合并事项法定披露文件",
-        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000110465926131201/tm2630454d11_425.htm"
-      },
-      {
-        "symbol": "CRWD",
-        "name_cn": "众击安全",
-        "filing_date": "2026-11-23",
-        "form": "8-K",
-        "item_codes": [
-          "1.01",
-          "7.01",
-          "9.01"
-        ],
-        "items_cn": "签署重大具有法律约束力的协议（如并购或战略合作）；依据公平披露准则发布的官方投资者沟通文件",
-        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000110465926130785/tm2630454d1_8k.htm"
-      },
-      {
-        "symbol": "CRWD",
-        "name_cn": "众击安全",
-        "filing_date": "2026-11-23",
-        "form": "8-K",
-        "item_codes": [
-          "2.02",
-          "9.01"
-        ],
-        "items_cn": "正式披露季度或年度经营业绩与财务状况",
-        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000035/crwd-20261123.htm"
       },
       {
         "symbol": "AMD",
         "name_cn": "超威半导体",
         "filing_date": "2026-11-20",
         "form": "8-K",
-        "item_codes": [
-          "5.03",
-          "9.01"
-        ],
-        "items_cn": "修订公司章程或治理细则",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000218/amd-20261118.htm"
       },
       {
@@ -564,14 +520,8 @@
         "name_cn": "派拓网络",
         "filing_date": "2026-11-18",
         "form": "8-K",
-        "item_codes": [
-          "2.02",
-          "3.02",
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "items_cn": "正式披露季度或年度经营业绩与财务状况；未注册股权证券发行事项；依据公平披露准则发布的官方投资者沟通文件；公司主动披露的其他法定重大事项",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/1327567/000132756726000030/panw-20261117.htm"
       },
       {
@@ -579,35 +529,17 @@
         "name_cn": "英伟达",
         "filing_date": "2026-11-17",
         "form": "8-K",
-        "item_codes": [
-          "2.02",
-          "9.01"
-        ],
-        "items_cn": "正式披露季度或年度经营业绩与财务状况",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/nvda-20261117.htm"
-      },
-      {
-        "symbol": "AMD",
-        "name_cn": "超威半导体",
-        "filing_date": "2026-11-16",
-        "form": "8-K/A",
-        "item_codes": [
-          "3.02"
-        ],
-        "items_cn": "未注册股权证券发行事项",
-        "url": "https://www.sec.gov/Archives/edgar/data/2488/000119312526462340/d105780d8ka.htm"
       },
       {
         "symbol": "QCOM",
         "name_cn": "高通",
         "filing_date": "2026-11-13",
         "form": "8-K",
-        "item_codes": [
-          "1.01",
-          "8.01",
-          "9.01"
-        ],
-        "items_cn": "签署重大具有法律约束力的协议（如并购或战略合作）；公司主动披露的其他法定重大事项",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/804328/000110465926127163/tm2629667d1_8k.htm"
       },
       {
@@ -615,35 +547,17 @@
         "name_cn": "英伟达",
         "filing_date": "2026-11-12",
         "form": "8-K",
-        "item_codes": [
-          "5.02",
-          "9.01"
-        ],
-        "items_cn": "董事或核心高级管理人员离任、复职或新任变动",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm"
-      },
-      {
-        "symbol": "META",
-        "name_cn": "脸书母公司",
-        "filing_date": "2026-11-12",
-        "form": "8-K",
-        "item_codes": [
-          "8.01",
-          "9.01"
-        ],
-        "items_cn": "公司主动披露的其他法定重大事项",
-        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000119312526458525/d177728d8k.htm"
       },
       {
         "symbol": "AAPL",
         "name_cn": "苹果",
         "filing_date": "2026-11-09",
         "form": "8-K",
-        "item_codes": [
-          "8.01",
-          "9.01"
-        ],
-        "items_cn": "公司主动披露的其他法定重大事项",
+        "item_codes": [],
+        "items_cn": "法定临时报告披露",
         "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126042798/ef20085077_8k.htm"
       }
     ],

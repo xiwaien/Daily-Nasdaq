@@ -16,6 +16,7 @@ import statistics
 import sys
 from typing import Any
 
+from analyze_treasury_spread import run_spread_pipeline
 from fetch_nasdaq_data import collect_all
 from glossary_manager import infer_glossary_for_text, load_ignored_terms
 
@@ -341,6 +342,11 @@ def build_daily_report_md(
     ])
     for note in ms.get("summary_notes_cn", []):
         lines.append(f"- {note}")
+    lines.append(
+        f"- **长短期国债利差可视化专刊**：已同步生成最新长短端收益率与期限利差走势图及全期限曲线分析（详见专题报告 [{tdate}_美债期限利差专题分析.md](资讯栏目/{tdate}_美债期限利差专题分析.md) 与交互看板 [美债期限利差看板.html](美债期限利差看板.html)）。"
+    )
+    lines.append("")
+    lines.append(f"![美债长短期收益率与期限利差全景监测图](资讯栏目/{tdate}_美债长短期利差走势图.png)")
 
     lines.extend([
         "",
@@ -659,6 +665,9 @@ def build_dashboard_html(
         <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--border,#1f2937)] text-[var(--foreground,#f3f4f6)] bg-[var(--background,#0b0f19)]">
           样本涨跌家数：{ms["up_stocks"]} 涨 / {down_stocks} 跌
         </span>
+        <a href="美债期限利差看板.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--primary,#3b82f6)] text-[var(--primary,#3b82f6)] bg-[var(--background,#0b0f19)] hover:opacity-80">
+          打开美债长短期利差看板 &rarr;
+        </a>
       </div>
     </header>
 
@@ -1328,10 +1337,15 @@ def main() -> None:
     html_path = BASE_DIR / f"{tdate}.html"
     html_path.write_text(html_str, encoding="utf-8")
 
+    # 4. 同步运行美债长短期期限利差计算与可视化算法
+    spread_res = run_spread_pipeline()
+
     print(f"[生成完成] 主报告：{md_path}")
     print(f"[生成完成] 交互看板：{html_path}")
     print(f"[生成完成] 官方政策资讯专刊：{briefing_path}")
     print(f"[生成完成] 官方信源快照：{snapshot_path}")
+    print(f"[生成完成] 美债利差走势图：{spread_res['png_path']}")
+    print(f"[生成完成] 美债利差交互看板：{spread_res['html_path']}")
     print(f"[术语伴读] 本期自动推断并解释专业术语 {len(glossary_items)} 条")
 
 
