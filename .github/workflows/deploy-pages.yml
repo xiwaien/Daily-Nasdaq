@@ -7,43 +7,38 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: "pages"
+  group: "gh-pages-deploy"
   cancel-in-progress: true
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: 检出仓库代码
+      - name: 检出主分支代码
         uses: actions/checkout@v4
 
       - name: 编译统一交互式门户主页
         run: python3 算法与配置/build_portal.py
 
-      - name: 组装在线网页站点目录
+      - name: 组装在线网页目录并自动推送至 gh-pages 分支
         run: |
-          mkdir -p _site
-          cp -r 交互式看板/* _site/
-          cp -r 每日投研报告 _site/
-          cp -r 资讯栏目 _site/
-          cp -r 国债利差专题 _site/
+          mkdir -p /tmp/_site
+          touch /tmp/_site/.nojekyll
+          cp -r 交互式看板/* /tmp/_site/
+          cp -r 每日投研报告 /tmp/_site/
+          cp -r 资讯栏目 /tmp/_site/
+          cp -r 国债利差专题 /tmp/_site/
 
-      - name: 配置 GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: 上传网页构建产物
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "_site"
-
-      - name: 发布上线交互式页面
-        id: deployment
-        uses: actions/deploy-pages@v4
+          cd /tmp/_site
+          git init
+          git checkout -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy: auto-build interactive dashboard site"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
