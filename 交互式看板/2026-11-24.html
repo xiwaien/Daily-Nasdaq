@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>纳斯达克与美股核心科技股每日投研看板 — 2026-11-24</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg-fallback: #0b0f19;
+      --card-fallback: #111827;
+      --fg-fallback: #f3f4f6;
+      --muted-fallback: #9ca3af;
+      --border-fallback: #1f2937;
+      --primary-fallback: #3b82f6;
+      --primary-fg-fallback: #ffffff;
+      --success-fallback: #10b981;
+      --error-fallback: #ef4444;
+      --warning-fallback: #f59e0b;
+    }
+    body {
+      background-color: var(--background, var(--bg-fallback));
+      color: var(--foreground, var(--fg-fallback));
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: var(--foreground, var(--fg-fallback)); }
+  </style>
+</head>
+<body class="bg-[var(--background,#0b0f19)] text-[var(--foreground,#f3f4f6)] antialiased p-4 md:p-6">
+  <div class="max-w-7xl mx-auto space-y-5">
+
+    <!-- 顶部中文投研抬头 -->
+    <header class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 text-xs tracking-wider text-[var(--muted-foreground,#9ca3af)] font-semibold">
+          <span>美股科技与量化投研案头</span>
+          <span>•</span>
+          <span>全中文权威数据与政策监测日报</span>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold mt-1">纳斯达克指数与核心科技股每日投研看板</h1>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mt-1">
+          美东交易日期：<span class="font-mono text-[var(--foreground,#f3f4f6)]">2026-11-24</span> &nbsp;|&nbsp;
+          覆盖范围：4 大基准指数 + 19 家核心科技龙头 + 跨资产情绪 + 央行及部委纯官方资讯
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border bg-[var(--background,#0b0f19)]" style="border-color: #ef4444; color: #ef4444;">
+          综合情绪：31.9分｜偏空谨慎（波动高企、均线承压）
+        </span>
+        <span class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--border,#1f2937)] text-[var(--foreground,#f3f4f6)] bg-[var(--background,#0b0f19)]">
+          样本涨跌家数：6 涨 / 13 跌
+        </span>
+        <a href="美债期限利差看板.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--primary,#3b82f6)] text-[var(--primary,#3b82f6)] bg-[var(--background,#0b0f19)] hover:opacity-80">
+          打开美债长短期利差看板 &rarr;
+        </a>
+      </div>
+    </header>
+
+    <!-- 四大核心基准指数卡片 -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="index-cards"></section>
+
+    <!-- 新增：多维市场情绪与跨资产风向标 -->
+    <section class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--border,#1f2937)]">
+        <div>
+          <h2 class="text-base font-bold">多维市场情绪与跨资产宏观风向标</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">综合期权恐慌度、黑天鹅偏度、美元汇率、美债利率走廊与避险资产实时监控市场温度</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs tabular-nums" id="sentiment-badges"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="sentiment-grid"></div>
+    </section>
+
+    <!-- 核心科技股双向排行与板块/量比面板 -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div class="lg:col-span-8 bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 flex flex-col">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[var(--border,#1f2937)]">
+          <div>
+            <h2 class="text-base font-bold">核心科技股涨跌幅与均线偏离双向对比图</h2>
+            <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">点击右侧按钮切换时间窗口或均线偏离维度，直观识别领涨龙头与超跌标的</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="metric-tabs">
+            <button data-metric="chg_1d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]">单日涨跌</button>
+            <button data-metric="chg_5d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">近5日</button>
+            <button data-metric="chg_20d" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">近20日</button>
+            <button data-metric="dist_ma20" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">较20日均线</button>
+            <button data-metric="dist_ma50" class="metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">较50日均线</button>
+          </div>
+        </div>
+        <div id="diverging-chart" class="mt-4 space-y-2"></div>
+      </div>
+
+      <div class="lg:col-span-4 space-y-4">
+        <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+          <h2 class="text-base font-bold">三大科技子板块等权均值对比</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mb-3">单日表现与近5日、年初至今平均涨跌幅对照</p>
+          <div id="sector-chart" class="space-y-3"></div>
+        </div>
+
+        <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+          <h2 class="text-base font-bold">放量异动监控雷达（量比 &ge; 1.25倍）</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)] mb-3">识别当日机构资金集中抢筹或大举换手标的</p>
+          <div id="volume-radar" class="space-y-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 盘面核心逻辑三栏点评 -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4" id="commentary-cards"></section>
+
+    <!-- 新增：官方宏观政策与国际经贸资讯专栏（零小道消息） -->
+    <section class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--border,#1f2937)]">
+        <div>
+          <h2 class="text-base font-bold">官方宏观政策、美元利率与国际经贸资讯专栏</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">严格剔除一切小道传闻，仅提炼美联储、纽约联储、商务部、贸易代表办公室及美国证监会法定一手文件</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-xs font-semibold border border-[var(--primary,#3b82f6)] text-[var(--primary,#3b82f6)]">
+          纯官方权威信源 • 归档于《资讯栏目》文件夹
+        </span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" id="official-pillars"></div>
+    </section>
+
+    <!-- 19家核心科技股可筛选排序全中文明细表 -->
+    <section class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-[var(--border,#1f2937)]">
+        <div>
+          <h2 class="text-base font-bold">19家纳斯达克核心科技股量化技术面明细表</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">支持按中文子板块筛选，点击任意数字表头可切换升序或降序排列</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5" id="sector-filters">
+          <button data-sector="全部" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]">全部 (19)</button>
+          <button data-sector="科技七巨头" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">科技七巨头 (7)</button>
+          <button data-sector="半导体与芯片设备" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">半导体与芯片设备 (6)</button>
+          <button data-sector="软件、云计算与网安" class="sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">软件、云计算与网安 (6)</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto mt-3">
+        <table class="w-full text-xs text-left border-collapse">
+          <thead>
+            <tr class="border-b border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]">
+              <th class="py-2.5 px-2 font-semibold">公司名称（代码）</th>
+              <th class="py-2.5 px-2 font-semibold">所属板块</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="close">收盘价(美元)</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_1d">单日涨跌</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_5d">近5日</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="chg_20d">近20日</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="ytd">年初至今</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_ma20">较20日均线</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_ma50">较50日均线</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="rel_vol">20日量比</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="ann_vol">年化波动率</th>
+              <th class="py-2.5 px-2 font-semibold text-right sortable" data-sort="dist_52w">距52周高点</th>
+            </tr>
+          </thead>
+          <tbody id="equity-tbody" class="divide-y divide-[var(--border,#1f2937)]"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 新增：初学者投研术语通俗词典（支持检索与已掌握折叠） -->
+    <section class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-3 border-b border-[var(--border,#1f2937)]">
+        <div>
+          <h2 class="text-base font-bold">初学者投研术语通俗伴读词典</h2>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)]">系统已自动提取今日报告中的专业名词并附通俗解释；若您已熟悉某词，可点击卡片右上角“本次隐藏”，或告知我永久不再解释</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="glossary-search" type="text" placeholder="搜索术语（如：均线、加息、量比）..."
+                 class="px-3 py-1.5 rounded-lg text-xs bg-[var(--background,#0b0f19)] border border-[var(--border,#1f2937)] text-[var(--foreground,#f3f4f6)] focus:outline-none" />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="glossary-grid"></div>
+    </section>
+
+  </div>
+
+  <script>
+    const DATA = {"indices": [{"symbol": "^IXIC", "name_cn": "纳斯达克综合指数", "close": 23733.54, "chg_1d": -1.48, "chg_5d": -2.45, "chg_20d": -10.36, "dist_ma50": -8.81, "dist_52w": -14.39}, {"symbol": "^NDX", "name_cn": "纳斯达克100指数", "close": 26214.17, "chg_1d": -1.99, "chg_5d": -2.92, "chg_20d": -11.59, "dist_ma50": -9.99, "dist_52w": -16.41}, {"symbol": "^SOX", "name_cn": "费城半导体指数", "close": 8832.5, "chg_1d": -7.88, "chg_5d": -8.4, "chg_20d": -23.08, "dist_ma50": -21.54, "dist_52w": -39.73}, {"symbol": "^GSPC", "name_cn": "标普500指数", "close": 7201.09, "chg_1d": -0.5, "chg_5d": -1.9, "chg_20d": -6.75, "dist_ma50": -5.37, "dist_52w": -8.2}], "stocks": [{"symbol": "AAPL", "name_cn": "苹果", "sector_cn": "科技七巨头", "close": 354.07, "chg_1d": 1.43, "chg_5d": 0.61, "chg_20d": 2.01, "ytd": 30.24, "dist_ma20": 1.72, "dist_ma50": 3.35, "rel_vol": 0.82, "ann_vol": 29.1, "dist_52w": -1.87}, {"symbol": "MSFT", "name_cn": "微软", "sector_cn": "科技七巨头", "close": 496.13, "chg_1d": 0.74, "chg_5d": -2.0, "chg_20d": -6.62, "ytd": 2.59, "dist_ma20": -4.44, "dist_ma50": -4.51, "rel_vol": 0.76, "ann_vol": 38.78, "dist_52w": -11.27}, {"symbol": "NVDA", "name_cn": "英伟达", "sector_cn": "科技七巨头", "close": 155.38, "chg_1d": -5.86, "chg_5d": -0.05, "chg_20d": -28.71, "ytd": -16.69, "dist_ma20": -11.61, "dist_ma50": -24.19, "rel_vol": 1.19, "ann_vol": 137.75, "dist_52w": -36.15}, {"symbol": "AMZN", "name_cn": "亚马逊", "sector_cn": "科技七巨头", "close": 252.29, "chg_1d": -1.21, "chg_5d": -2.17, "chg_20d": -0.32, "ytd": 9.3, "dist_ma20": -2.1, "dist_ma50": -1.12, "rel_vol": 0.63, "ann_vol": 45.64, "dist_52w": -12.16}, {"symbol": "GOOGL", "name_cn": "谷歌母公司", "sector_cn": "科技七巨头", "close": 279.05, "chg_1d": -1.08, "chg_5d": -0.41, "chg_20d": -12.95, "ytd": -10.85, "dist_ma20": -2.31, "dist_ma50": -12.7, "rel_vol": 0.73, "ann_vol": 58.85, "dist_52w": -31.71}, {"symbol": "META", "name_cn": "脸书母公司", "sector_cn": "科技七巨头", "close": 589.82, "chg_1d": -1.3, "chg_5d": -4.69, "chg_20d": -4.9, "ytd": -10.65, "dist_ma20": -4.16, "dist_ma50": -12.45, "rel_vol": 0.58, "ann_vol": 47.43, "dist_52w": -24.36}, {"symbol": "TSLA", "name_cn": "特斯拉", "sector_cn": "科技七巨头", "close": 384.68, "chg_1d": -0.2, "chg_5d": 1.2, "chg_20d": -5.59, "ytd": -14.46, "dist_ma20": 0.35, "dist_ma50": 2.11, "rel_vol": 0.79, "ann_vol": 72.64, "dist_52w": -22.88}, {"symbol": "AVGO", "name_cn": "博通", "sector_cn": "半导体与芯片设备", "close": 301.08, "chg_1d": -3.98, "chg_5d": -11.86, "chg_20d": -12.05, "ytd": -13.01, "dist_ma20": -8.64, "dist_ma50": -11.79, "rel_vol": 0.99, "ann_vol": 84.22, "dist_52w": -39.18}, {"symbol": "AMD", "name_cn": "超威半导体", "sector_cn": "半导体与芯片设备", "close": 413.27, "chg_1d": -8.86, "chg_5d": -17.91, "chg_20d": -26.24, "ytd": 92.97, "dist_ma20": -16.99, "dist_ma50": -24.93, "rel_vol": 1.04, "ann_vol": 134.25, "dist_52w": -37.24}, {"symbol": "QCOM", "name_cn": "高通", "sector_cn": "半导体与芯片设备", "close": 164.96, "chg_1d": -0.25, "chg_5d": -1.03, "chg_20d": -10.43, "ytd": -3.56, "dist_ma20": -1.91, "dist_ma50": -6.57, "rel_vol": 0.89, "ann_vol": 80.45, "dist_52w": -36.53}, {"symbol": "MU", "name_cn": "美光科技", "sector_cn": "半导体与芯片设备", "close": 629.79, "chg_1d": -11.01, "chg_5d": -11.6, "chg_20d": -32.19, "ytd": 120.66, "dist_ma20": -17.34, "dist_ma50": -30.18, "rel_vol": 1.11, "ann_vol": 135.74, "dist_52w": -49.82}, {"symbol": "ASML", "name_cn": "阿斯麦", "sector_cn": "半导体与芯片设备", "close": 1336.06, "chg_1d": -3.45, "chg_5d": -3.4, "chg_20d": -18.31, "ytd": 24.88, "dist_ma20": -8.91, "dist_ma50": -17.31, "rel_vol": 0.86, "ann_vol": 72.9, "dist_52w": -33.2}, {"symbol": "INTC", "name_cn": "英特尔", "sector_cn": "半导体与芯片设备", "close": 54.8, "chg_1d": -8.15, "chg_5d": -0.67, "chg_20d": -41.54, "ytd": 48.51, "dist_ma20": -10.77, "dist_ma50": -38.17, "rel_vol": 0.84, "ann_vol": 143.19, "dist_52w": -61.5}, {"symbol": "NFLX", "name_cn": "奈飞", "sector_cn": "软件、云计算与网安", "close": 58.87, "chg_1d": 1.33, "chg_5d": -1.36, "chg_20d": -5.84, "ytd": -37.21, "dist_ma20": -4.76, "dist_ma50": -11.58, "rel_vol": 0.88, "ann_vol": 32.83, "dist_52w": -46.35}, {"symbol": "ADBE", "name_cn": "奥多比", "sector_cn": "软件、云计算与网安", "close": 232.08, "chg_1d": 3.62, "chg_5d": -1.47, "chg_20d": -6.56, "ytd": -33.69, "dist_ma20": -2.82, "dist_ma50": -4.25, "rel_vol": 0.94, "ann_vol": 33.11, "dist_52w": -36.01}, {"symbol": "PANW", "name_cn": "派拓网络", "sector_cn": "软件、云计算与网安", "close": 352.99, "chg_1d": -0.12, "chg_5d": 14.13, "chg_20d": -12.13, "ytd": 91.63, "dist_ma20": 3.32, "dist_ma50": -3.7, "rel_vol": 0.75, "ann_vol": 69.5, "dist_52w": -18.35}, {"symbol": "CRWD", "name_cn": "众击安全", "sector_cn": "软件、云计算与网安", "close": 210.86, "chg_1d": 0.9, "chg_5d": -3.97, "chg_20d": -21.33, "ytd": 79.93, "dist_ma20": -9.35, "dist_ma50": -14.24, "rel_vol": 1.61, "ann_vol": 66.53, "dist_52w": -26.53}, {"symbol": "PLTR", "name_cn": "帕兰提尔", "sector_cn": "软件、云计算与网安", "close": 161.18, "chg_1d": 1.14, "chg_5d": 2.95, "chg_20d": -18.89, "ytd": -9.32, "dist_ma20": -4.04, "dist_ma50": -11.8, "rel_vol": 0.8, "ann_vol": 71.27, "dist_52w": -24.31}, {"symbol": "SNPS", "name_cn": "新思科技", "sector_cn": "软件、云计算与网安", "close": 414.82, "chg_1d": -2.85, "chg_5d": -4.75, "chg_20d": -12.56, "ytd": -11.69, "dist_ma20": -7.91, "dist_ma50": -7.88, "rel_vol": 0.62, "ann_vol": 53.12, "dist_52w": -23.11}], "sentimentSummary": {"score": 31.9, "regime": "偏空谨慎（波动高企、均线承压）", "upStocks": 6, "totalStocks": 19, "spread10y3mBp": 73, "hygTltRatio": 0.9379, "hygTltChg": 0.13}, "sentimentCards": [{"symbol": "^VIX", "name_cn": "标普500恐慌指数", "group_cn": "期权恐慌与波动", "close": 26.36, "unit": "", "chg_1d": -0.98, "meaning_cn": "数值越高代表市场避险恐慌越重，低于20偏乐观，高于30属恐慌区间"}, {"symbol": "^VXN", "name_cn": "纳指100波动率指数", "group_cn": "期权恐慌与波动", "close": 36.42, "unit": "", "chg_1d": 0.3, "meaning_cn": "专门衡量纳斯达克科技权重股的隐含波动与期权对冲热度"}, {"symbol": "^SKEW", "name_cn": "黑天鹅尾部偏度指数", "group_cn": "期权恐慌与波动", "close": 139.16, "unit": "", "chg_1d": -0.86, "meaning_cn": "衡量机构买入极端暴跌保护期权的意愿，高于140提示尾部防范升温"}, {"symbol": "DX-Y.NYB", "name_cn": "美元指数", "group_cn": "汇率与全球流动性", "close": 104.05, "unit": "", "chg_1d": 0.23, "meaning_cn": "反映美元对主要货币强弱，走强往往压制跨国科技股海外折算收益"}, {"symbol": "^TNX", "name_cn": "10年期美债收益率", "group_cn": "利率与美联储预期", "close": 4.9, "unit": "%", "chg_1d": -0.28, "meaning_cn": "全球科技股估值折现之锚，收益率上行直接压制高估值成长股"}, {"symbol": "^IRX", "name_cn": "13周美债收益率", "group_cn": "利率与美联储预期", "close": 4.17, "unit": "%", "chg_1d": 0.51, "meaning_cn": "紧贴美联储近期基准利率预期的短端资金利率指标"}, {"symbol": "GC=F", "name_cn": "纽约黄金期货", "group_cn": "避险与通胀预期", "close": 3525.1, "unit": "$", "chg_1d": -1.03, "meaning_cn": "衡量央行购金、地缘避险需求及实际利率预期"}, {"symbol": "BTC-USD", "name_cn": "比特币价格", "group_cn": "流动性与风险偏好", "close": 58793.39, "unit": "$", "chg_1d": -1.6, "meaning_cn": "全天候交易的高弹性风险资产，反映全球投机流动性松紧"}], "officialPillars": [{"pillar": "一、美元利率与央行动态", "authority": "美联储 / 纽约联储", "items": ["美联储11月24日公布10月贴现率会议纪要：12家地区联储中有8家曾建议加息25个基点至4.25%，理事会最终维持不变。", "美联储10月FOMC纪要显示几乎全体委员认为若通胀粘性持续，后续仍有必要继续加息。", "纽约联储EFFR稳定于3.88%、SOFR报3.92%，静待11月25日三季度GDP修正值与10月PCE数据。"]}, {"pillar": "二、国际贸易与技术管制", "authority": "联邦公报 / 商务部 / USTR", "items": ["美国商务部工业与安全局（BIS）最新《实体清单增补最终规则》将马来西亚、新加坡、泰国共7家涉先进计算与AI芯片转运实体列入实体清单。", "美国商务部工业与安全局就合规申报表格向白宫管理与预算办公室提交法定审查通知。", "美国商务部《先进半导体远程算力访问管制新规》已正式生效，管控海外数据中心远程算力租赁。"]}, {"pillar": "三、证监会法定重大公告", "authority": "美国证监会 SEC", "items": ["2026-11-24｜高通（QCOM）提交 8-K：向CEO与CFO授予挂钩250~500美元股价门槛的长期价值创造绩效股激励", "2026-11-24｜谷歌母公司（GOOGL）提交 8-K：完成60亿加元四期优先票据公开发行交割（2029-2066年到期）", "2026-11-24｜众击安全（CRWD）提交 425：继续发布439亿美元全股票收购Zscaler法定沟通文件；美光科技（MU）同日提交2026财年10-K年报"]}], "commentaryCards": [{"tag": "指数与广度", "tagColor": "text-[var(--primary,#3b82f6)]", "title": "纳指回落 -1.48%，资金轮动道指破五万点", "body": "费城半导体指数回吐 -7.88%，全样本 6 涨 13 跌，软件板块逆势涨 +0.67%，仅 2 家站上50日均线。"}, {"tag": "领涨龙头", "tagColor": "text-[var(--success,#10b981)]", "title": "奥多比（+3.62%）与苹果（+1.43%）领跑", "body": "低波动防御科技与超跌软件获资金回补，苹果距52周高点仅 -1.87% 并稳居三重均线之上。"}, {"tag": "波动与防守", "tagColor": "text-[var(--error,#ef4444)]", "title": "美光科技（-11.01%）等芯片链高波动回撤", "body": "综合情绪 31.9 分（偏空谨慎），半导体年化波动率达 98.17%，叠加新出口管制清单，需严控节前仓位。"}], "glossary": [{"term": "美联储与联邦公开市场委员会（FOMC）", "category": "宏观与货币政策", "definition": "美联储是美国的中央银行，而联邦公开市场委员会（简称 FOMC）是美联储内部专门决定“美元基准利率涨跌”的核心决策机构，每年通常召开 8 次例会。", "practical": "全球资金成本都看它脸色：一旦委员会态度强硬（市场俗称“鹰派”），意味着利率可能维持高位甚至继续加息，科技股往往承压；态度温和（俗称“鸽派”），则利好科技股估值扩张。"}, {"term": "加息、降息与联邦基金利率", "category": "宏观与货币政策", "definition": "联邦基金利率是美国商业银行之间隔夜拆借美元的基准利率。调高该利率即“加息”，意在给过热经济和物价降温；调低即“降息”（或减息），意在降低企业和个人借钱成本、刺激经济。", "practical": "科技成长股大量利润来自未来数年，利率越高，未来利润折算到今天的价值就越低。因此“预期加息”通常压制纳斯达克，“预期降息”则提振纳斯达克。"}, {"term": "基点（bp）", "category": "宏观与货币政策", "definition": "金融市场用来衡量利率微幅变动的最小常用单位。1 个基点等于 0.01%（即万分之一），100 个基点等于 1 个百分点（1%）。", "practical": "例如常说的“美联储加息 25 个基点”，就是把基准利率上调 0.25%；“美债收益率跳升 10 个基点”，代表借债成本上升了 0.10%。"}, {"term": "10年期美债收益率", "category": "宏观与货币政策", "definition": "投资者购买并持有美国政府 10 年期国债所能获得的年化回报率，被华尔街公认为“全球资产定价之锚”。", "practical": "由于美国国债几乎没有违约风险，当 10 年期美债收益率接近或突破 5% 时，大量稳健资金会觉得“躺赚 5% 利息很划算”，从而减少对高估值科技股的配置。"}, {"term": "美债期限利差（收益率曲线与倒挂）", "category": "宏观与货币政策", "definition": "用长期国债收益率减去短期国债收益率得到的差值（常见有“10年期减13周短债”和“10年期减2年期国债”）。正常情况下借钱时间越长，要求的利息补偿越高，利差为正数；若短期利率反超长期利率（利差变成负数），就叫“收益率倒挂”。", "practical": "利差保持正数且温和走阔，通常说明市场预期经济维持正增长或长期通胀有溢价；若利差由正转负陷入深度倒挂，历史上往往是美联储加息过猛、未来经济面临降温甚至衰退的经典预警。"}, {"term": "美元指数", "category": "宏观与货币政策", "definition": "综合反映美元在国际外汇市场上对欧元、日元、英镑等一篮子主要货币强弱程度的指标。", "practical": "苹果、英伟达、微软等纳斯达克巨头有一半左右收入来自海外。美元指数过强不仅代表全球美元回流美国本土、新兴市场承压，也会让跨国科技公司的海外收入换算回美元时缩水。"}, {"term": "出口管制、工业与安全局（BIS）及实体清单", "category": "国际经贸与监管", "definition": "美国商务部下属的工业与安全局负责管理高科技产品出口许可。被列入“实体清单”或受限地区的海外机构，未经美国政府特别批准，无法购买美国高端芯片、软件或租用受限的远程云计算算力。", "practical": "半导体公司（如英伟达、超威半导体、阿斯麦等）在海外拥有可观收入，出口管制范围的收紧或放宽会直接影响它们的订单预期。"}, {"term": "美国证监会 8-K 重大事项法定公告", "category": "国际经贸与监管", "definition": "美国证券交易委员会规定，美股上市公司一旦发生可能显著影响股价的重大事件（如收购兼并、核心高管辞职或复职、正式发布财报等），必须在 4 个工作日内提交的官方披露文件。", "practical": "相比社交媒体传闻或小道消息，8-K 文件具有严格法律效力，造假需承担刑事责任，是核实公司重大变动的最高权威一手信源。"}, {"term": "恐慌指数（VIX）与纳指波动率指数（VXN）", "category": "市场情绪与交易机制", "definition": "通过期权价格推算出来的未来 30 天市场预期波动幅度。VIX 对应标普500大盘，VXN 则专门对应纳斯达克100科技股。", "practical": "数值越低（如低于 18）代表市场平静乐观；突破 25 代表市场紧张不安；突破 35 往往代表极度恐慌抛售。当恐慌指数从高位单日暴跌逾 20% 时，通常意味着恐慌警报暂时解除、资金大举回流股市。"}, {"term": "黑天鹅偏度指数（SKEW）", "category": "市场情绪与交易机制", "definition": "衡量机构投资者在期权市场上花多少钱购买“防范大盘极端暴跌”保险的指标，正常区间通常在 100 至 135 之间。", "practical": "当该数值升至 140 以上时，说明尽管指数可能在涨，华尔街大资金暗地里仍在加买“防暴跌保险”，提示需留一份清醒。"}, {"term": "信用风险偏好比值（高收益债与长端国债比值）", "category": "市场情绪与交易机制", "definition": "比较“高收益企业债基金（HYG，风险较高、利息高）”与“长期美国国债基金（TLT，安全避险）”的价格比值。", "practical": "债市资金往往比股市更敏锐：比值上升说明聪明钱愿意承担企业违约风险、整体市场偏向进攻；比值大跌则说明资金正在撤退回国债避险。"}, {"term": "市场广度（上涨家数占比）", "category": "市场情绪与交易机制", "definition": "统计指数上涨时，内部究竟是“绝大多数成分股一起涨”，还是“只有两三只超级大盘股拉动指数、其余股票都在跌”。", "practical": "健康的上涨需要高市场广度（如超过 70%~80% 的股票同步上涨且站上均线）；若只有少数权重股独涨，行情通常走不远。"}, {"term": "高弹性股票（高贝塔 / 高 Beta）", "category": "市场情绪与交易机制", "definition": "衡量个股相对大盘涨跌放大倍数的指标。大盘涨 1% 时往往能涨 2%~3%、大盘跌 1% 时也跌得更猛的股票，称为高弹性（高贝塔）标的，典型代表如半导体、人工智能软件股。", "practical": "当市场情绪转暖反攻时，高弹性股票是冲锋主力；当市场避险下跌时，稳健型股票（如苹果）则更抗跌。"}, {"term": "移动平均线（20日、50日、200日均线）与均线偏离度", "category": "技术分析与量化指标", "definition": "把过去 20 个、50 个或 200 个交易日的收盘价算出的平均价格，分别代表短期（约一个月）、中期（约一个季度）和长期（约一年）的市场平均持仓成本。当前股价高于或低于均线的百分比即为“均线偏离度”。", "practical": "股价站上均线说明近期买入的人普遍赚钱，均线会形成支撑；反之股价跌破均线，上方套牢盘在反弹到均线附近时容易卖出解套，均线就变成了阻力位。其中 200 日均线常被称为“牛熊分界线”。"}, {"term": "相对成交量（量比）", "category": "技术分析与量化指标", "definition": "当日成交股数除以过去 20 个交易日平均每日成交股数的倍数。1.0 倍代表成交平平；超过 1.25 倍代表明显放量；超过 2 倍以上属于巨量异动。", "practical": "俗话说“股市里什么都能骗人，唯独成交量不会”：放量大涨说明真金白银在抢筹，放量大跌则说明机构资金正在集中撤离。"}, {"term": "20日年化波动率", "category": "技术分析与量化指标", "definition": "根据最近 20 个交易日每天涨跌幅的剧烈程度，按全年约 252 个交易日折算出的年度价格摆动幅度指标。", "practical": "普通稳健大盘股的年化波动率多在 20%~35% 左右；如果某只股票年化波动率高达 100% 以上，说明它近期每天暴涨暴跌如同过山车，仓位控制必须格外谨慎。"}, {"term": "距52周高点回撤", "category": "技术分析与量化指标", "definition": "当前收盘价相比过去一年（52周）最高价格下跌了多少百分比。", "practical": "通常回撤在 10% 以内属于正常震荡，回撤 10%~20% 称为“技术性回调”，回撤超过 20% 则进入个股或板块层面的“技术性熊市/深度修正区间”。"}]};
+
+    const fmtPct = (v) => (v === null || v === undefined ? "暂无" : v > 0 ? `+${v.toFixed(2)}%` : `${v.toFixed(2)}%`);
+    const pctColor = (v) => (v > 0 ? "text-[var(--success,#10b981)]" : v < 0 ? "text-[var(--error,#ef4444)]" : "text-[var(--muted-foreground,#9ca3af)]");
+
+    // 1. 渲染四大基准指数卡片
+    document.getElementById("index-cards").innerHTML = DATA.indices.map(idx => `
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 flex flex-col justify-between">
+        <div class="flex items-start justify-between">
+          <div>
+            <div class="text-sm font-bold">${idx.name_cn}</div>
+            <div class="text-xs font-mono text-[var(--muted-foreground,#9ca3af)]">${idx.symbol}</div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold tabular-nums ${pctColor(idx.chg_1d)} border border-[var(--border,#1f2937)]">
+            ${fmtPct(idx.chg_1d)}
+          </span>
+        </div>
+        <div class="text-2xl font-bold tabular-nums mt-2">${idx.close.toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
+        <div class="grid grid-cols-3 gap-1 mt-3 pt-2.5 border-t border-[var(--border,#1f2937)] text-xs tabular-nums">
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">近5日</span><span class="${pctColor(idx.chg_5d)} font-medium">${fmtPct(idx.chg_5d)}</span></div>
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">较50日均线</span><span class="${pctColor(idx.dist_ma50)} font-medium">${fmtPct(idx.dist_ma50)}</span></div>
+          <div><span class="text-[var(--muted-foreground,#9ca3af)] block">距52周高点</span><span class="text-[var(--muted-foreground,#9ca3af)] font-medium">${fmtPct(idx.dist_52w)}</span></div>
+        </div>
+      </div>
+    `).join("");
+
+    // 2. 渲染多维市场情绪风向标
+    const ss = DATA.sentimentSummary;
+    document.getElementById("sentiment-badges").innerHTML = `
+      <span class="px-2.5 py-1 rounded border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+        10年减3月美债利差：<strong>${ss.spread10y3mBp >= 0 ? "+" : ""}${ss.spread10y3mBp} 基点</strong>
+      </span>
+      <span class="px-2.5 py-1 rounded border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+        信用债/国债风险比：<strong>${ss.hygTltRatio} (${fmtPct(ss.hygTltChg)})</strong>
+      </span>
+    `;
+    document.getElementById("sentiment-grid").innerHTML = DATA.sentimentCards.map(c => {
+      const valTxt = c.unit === "$"
+        ? `$${c.close.toLocaleString("en-US", { minimumFractionDigits: 2 })}`
+        : `${c.close.toFixed(2)}${c.unit}`;
+      // 恐慌指数下跌属于情绪改善，用中性或直观涨跌色展示并标注说明
+      return `
+        <div class="p-3 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-[var(--muted-foreground,#9ca3af)]">${c.group_cn}</span>
+              <span class="font-mono text-[var(--muted-foreground,#9ca3af)]">${c.symbol}</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-sm font-bold">${c.name_cn}</span>
+              <span class="font-mono font-bold text-sm tabular-nums">${valTxt}</span>
+            </div>
+          </div>
+          <div class="mt-2 pt-2 border-t border-[var(--border,#1f2937)] flex items-center justify-between text-xs">
+            <span class="text-[var(--muted-foreground,#9ca3af)] truncate pr-2" title="${c.meaning_cn}">${c.meaning_cn}</span>
+            <span class="font-mono font-semibold tabular-nums ${pctColor(c.chg_1d)} shrink-0">${fmtPct(c.chg_1d)}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // 3. 渲染核心科技股双向对比图
+    let currentMetric = "chg_1d";
+    function renderDivergingChart() {
+      const sorted = [...DATA.stocks].sort((a, b) => b[currentMetric] - a[currentMetric]);
+      const maxAbs = Math.max(...sorted.map(s => Math.abs(s[currentMetric])), 1);
+
+      document.getElementById("diverging-chart").innerHTML = sorted.map(s => {
+        const val = s[currentMetric];
+        const widthPct = (Math.abs(val) / maxAbs) * 48;
+        const isPos = val >= 0;
+        const barColor = isPos ? "bg-[var(--success,#10b981)]" : "bg-[var(--error,#ef4444)]";
+        return `
+          <div class="grid grid-cols-12 items-center gap-2 text-xs">
+            <div class="col-span-4 sm:col-span-3 flex items-center justify-between pr-1">
+              <span class="font-semibold truncate">${s.name_cn}</span>
+              <span class="font-mono text-[var(--muted-foreground,#9ca3af)] ml-1">${s.symbol}</span>
+            </div>
+            <div class="col-span-6 sm:col-span-7 relative h-4 flex items-center">
+              <div class="w-full h-px bg-[var(--border,#1f2937)] absolute top-1/2"></div>
+              <div class="w-px h-4 bg-[var(--muted-foreground,#9ca3af)] opacity-40 absolute left-1/2"></div>
+              <div class="h-3 rounded-sm ${barColor} absolute transition-all"
+                   style="${isPos ? `left: 50%; width: ${widthPct}%;` : `right: 50%; width: ${widthPct}%;`}"></div>
+            </div>
+            <div class="col-span-2 text-right font-mono font-semibold tabular-nums ${pctColor(val)}">
+              ${fmtPct(val)}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    document.querySelectorAll(".metric-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentMetric = btn.dataset.metric;
+        document.querySelectorAll(".metric-btn").forEach(b => {
+          b.className = "metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]";
+        });
+        btn.className = "metric-btn px-2.5 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]";
+        renderDivergingChart();
+      });
+    });
+
+    // 4. 三大子板块对比
+    const sectorOrder = ["半导体与芯片设备", "科技七巨头", "软件、云计算与网安"];
+    document.getElementById("sector-chart").innerHTML = sectorOrder.map(secName => {
+      const items = DATA.stocks.filter(s => s.sector_cn === secName);
+      const avg1d = items.reduce((a, b) => a + b.chg_1d, 0) / items.length;
+      const avg5d = items.reduce((a, b) => a + b.chg_5d, 0) / items.length;
+      const avgYtd = items.reduce((a, b) => a + (b.ytd || 0), 0) / items.length;
+      return `
+        <div class="p-3 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>${secName}（${items.length}家）</span>
+            <span class="${pctColor(avg1d)} tabular-nums">单日：${fmtPct(avg1d)}</span>
+          </div>
+          <div class="flex justify-between items-center text-xs text-[var(--muted-foreground,#9ca3af)] mt-1.5 tabular-nums">
+            <span>近5日均值：<strong class="${pctColor(avg5d)}">${fmtPct(avg5d)}</strong></span>
+            <span>年初至今：<strong class="${pctColor(avgYtd)}">${fmtPct(avgYtd)}</strong></span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // 5. 放量异动雷达
+    const volAnomalies = [...DATA.stocks].filter(s => s.rel_vol >= 1.25).sort((a, b) => b.rel_vol - a.rel_vol);
+    document.getElementById("volume-radar").innerHTML = volAnomalies.map(s => `
+      <div class="flex items-center justify-between text-xs p-2 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)]">
+        <div>
+          <span class="font-bold">${s.name_cn}</span>
+          <span class="font-mono text-[var(--muted-foreground,#9ca3af)] ml-1">${s.symbol}</span>
+        </div>
+        <div class="flex items-center gap-3 tabular-nums">
+          <span class="font-mono font-semibold text-[var(--warning,#f59e0b)]">量比 ${s.rel_vol.toFixed(2)}倍</span>
+          <span class="font-mono font-semibold ${pctColor(s.chg_1d)} w-16 text-right">${fmtPct(s.chg_1d)}</span>
+        </div>
+      </div>
+    `).join("");
+
+    // 6. 渲染盘面点评三栏与官方政策资讯三栏
+    document.getElementById("commentary-cards").innerHTML = DATA.commentaryCards.map(c => `
+      <div class="bg-[var(--card,#111827)] border border-[var(--border,#1f2937)] rounded-xl p-4 space-y-1.5">
+        <div class="text-xs font-semibold tracking-wider ${c.tagColor}">${c.tag}</div>
+        <h3 class="text-sm font-bold">${c.title}</h3>
+        <p class="text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed">${c.body}</p>
+      </div>
+    `).join("");
+
+    document.getElementById("official-pillars").innerHTML = DATA.officialPillars.map(p => `
+      <div class="p-4 rounded-xl border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)] space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[var(--border,#1f2937)] pb-2">
+          <span class="text-sm font-bold">${p.pillar}</span>
+          <span class="text-xs text-[var(--muted-foreground,#9ca3af)]">${p.authority}</span>
+        </div>
+        <ul class="space-y-2 text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed list-disc pl-4">
+          ${p.items.map(it => `<li>${it}</li>`).join("")}
+        </ul>
+      </div>
+    `).join("");
+
+    // 7. 渲染可筛选、可排序全中文表格
+    let currentSector = "全部";
+    let sortKey = "chg_1d";
+    let sortAsc = false;
+
+    function renderTable() {
+      const filtered = currentSector === "全部" ? DATA.stocks : DATA.stocks.filter(s => s.sector_cn === currentSector);
+      const sorted = [...filtered].sort((a, b) => sortAsc ? (a[sortKey] - b[sortKey]) : (b[sortKey] - a[sortKey]));
+
+      document.getElementById("equity-tbody").innerHTML = sorted.map(s => `
+        <tr class="hover:bg-[var(--background,#0b0f19)] transition-colors">
+          <td class="py-2.5 px-2">
+            <span class="font-bold">${s.name_cn}</span>
+            <span class="font-mono text-[var(--muted-foreground,#9ca3af)] ml-1">${s.symbol}</span>
+          </td>
+          <td class="py-2.5 px-2 text-[var(--muted-foreground,#9ca3af)]">${s.sector_cn}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums">${s.close.toFixed(2)}</td>
+          <td class="py-2.5 px-2 text-right font-mono font-semibold tabular-nums ${pctColor(s.chg_1d)}">${fmtPct(s.chg_1d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.chg_5d)}">${fmtPct(s.chg_5d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.chg_20d)}">${fmtPct(s.chg_20d)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.ytd)}">${fmtPct(s.ytd)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.dist_ma20)}">${fmtPct(s.dist_ma20)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${pctColor(s.dist_ma50)}">${fmtPct(s.dist_ma50)}</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums ${s.rel_vol >= 1.25 ? "font-bold text-[var(--warning,#f59e0b)]" : ""}">${s.rel_vol.toFixed(2)}倍</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums text-[var(--muted-foreground,#9ca3af)]">${s.ann_vol.toFixed(1)}%</td>
+          <td class="py-2.5 px-2 text-right font-mono tabular-nums text-[var(--muted-foreground,#9ca3af)]">${fmtPct(s.dist_52w)}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.querySelectorAll(".sector-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentSector = btn.dataset.sector;
+        document.querySelectorAll(".sector-btn").forEach(b => {
+          b.className = "sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--border,#1f2937)] text-[var(--muted-foreground,#9ca3af)]";
+        });
+        btn.className = "sector-btn px-3 py-1 rounded-md text-xs font-medium border border-[var(--primary,#3b82f6)] bg-[var(--primary,#3b82f6)] text-[var(--primary-foreground,#ffffff)]";
+        renderTable();
+      });
+    });
+
+    document.querySelectorAll("th.sortable").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.sort;
+        if (sortKey === key) {
+          sortAsc = !sortAsc;
+        } else {
+          sortKey = key;
+          sortAsc = false;
+        }
+        renderTable();
+      });
+    });
+
+    // 8. 渲染初学者的术语通俗伴读词典
+    const hiddenTerms = new Set();
+    let searchKeyword = "";
+
+    function renderGlossary() {
+      const list = DATA.glossary.filter(g => {
+        if (hiddenTerms.has(g.term)) return false;
+        if (!searchKeyword) return true;
+        const kw = searchKeyword.toLowerCase();
+        return g.term.toLowerCase().includes(kw) || g.category.toLowerCase().includes(kw) || g.definition.toLowerCase().includes(kw);
+      });
+
+      if (list.length === 0) {
+        document.getElementById("glossary-grid").innerHTML = `
+          <div class="col-span-2 text-xs text-[var(--muted-foreground,#9ca3af)] py-4 text-center">
+            未找到匹配术语，或当前术语均已隐藏。
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById("glossary-grid").innerHTML = list.map(g => `
+        <div class="p-3.5 rounded-lg border border-[var(--border,#1f2937)] bg-[var(--background,#0b0f19)] space-y-1.5">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="text-xs px-2 py-0.5 rounded border border-[var(--border,#1f2937)] text-[var(--primary,#3b82f6)] mr-1.5">${g.category}</span>
+              <span class="text-sm font-bold">${g.term}</span>
+            </div>
+            <button data-hide="${g.term}" class="hide-term-btn text-xs text-[var(--muted-foreground,#9ca3af)] hover:text-[var(--foreground,#f3f4f6)] shrink-0">
+              本次隐藏
+            </button>
+          </div>
+          <p class="text-xs text-[var(--foreground,#f3f4f6)] leading-relaxed"><strong>通俗理解：</strong>${g.definition}</p>
+          <p class="text-xs text-[var(--muted-foreground,#9ca3af)] leading-relaxed"><strong>看盘意义：</strong>${g.practical}</p>
+        </div>
+      `).join("");
+
+      document.querySelectorAll(".hide-term-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          hiddenTerms.add(btn.dataset.hide);
+          renderGlossary();
+        });
+      });
+    }
+
+    document.getElementById("glossary-search").addEventListener("input", (e) => {
+      searchKeyword = e.target.value.trim();
+      renderGlossary();
+    });
+
+    renderDivergingChart();
+    renderTable();
+    renderGlossary();
+  </script>
+</body>
+</html>

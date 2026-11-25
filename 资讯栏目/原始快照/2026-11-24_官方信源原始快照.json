@@ -1,0 +1,682 @@
+{
+  "latest_trading_date": "2026-11-24",
+  "market_sentiment": {
+    "composite_score": 31.9,
+    "regime_cn": "偏空谨慎（波动高企、均线承压）",
+    "breadth_1d_pct": 31.6,
+    "up_stocks": 6,
+    "total_stocks": 19,
+    "above_ma20_count": 3,
+    "above_ma50_count": 2,
+    "above_ma200_count": 7,
+    "spread_10y_3m_bp": 73,
+    "spread_30y_10y_bp": 39,
+    "tech_vol_spread": 10.06,
+    "hyg_tlt_ratio": 0.9379,
+    "hyg_tlt_chg_pct": 0.13,
+    "summary_notes_cn": [
+      "期权波动层面：标普500恐慌指数收于 26.36（单日 -0.98%），纳指100波动率指数收于 36.42，科技股相对大盘仍保有 +10.06 点的额外波动溢价。",
+      "尾部风险层面：黑天鹅偏度指数报 139.16，显示尾部黑天鹅对冲需求处于常态区间。",
+      "利率与美债层面：10年期美债收益率报 4.90%，10年期减13周美债期限利差为 +73 个基点，收益率曲线维持正斜率（未倒挂）。",
+      "跨资产信用层面：高收益公司债与长期国债比值报 0.9379（单日 +0.13%），信用债表现优于长端国债，债市资金偏向承担风险。"
+    ],
+    "indicators": [
+      {
+        "symbol": "^VIX",
+        "name_cn": "标普500恐慌指数",
+        "group_cn": "期权恐慌与波动",
+        "meaning_cn": "数值越高代表市场避险恐慌越重，低于20偏乐观，高于30属恐慌区间",
+        "date": "2026-11-24",
+        "close": 26.36,
+        "prev_close": 26.62,
+        "diff_1d": -0.26,
+        "chg_1d_pct": -0.98,
+        "chg_5d_pct": 3.53
+      },
+      {
+        "symbol": "^VXN",
+        "name_cn": "纳指100波动率指数",
+        "group_cn": "期权恐慌与波动",
+        "meaning_cn": "专门衡量纳斯达克科技权重股的隐含波动与期权对冲热度",
+        "date": "2026-11-24",
+        "close": 36.42,
+        "prev_close": 36.31,
+        "diff_1d": 0.11,
+        "chg_1d_pct": 0.3,
+        "chg_5d_pct": 5.75
+      },
+      {
+        "symbol": "^SKEW",
+        "name_cn": "黑天鹅尾部偏度指数",
+        "group_cn": "期权恐慌与波动",
+        "meaning_cn": "衡量机构买入极端暴跌保护期权的意愿，高于140提示尾部防范升温",
+        "date": "2026-11-24",
+        "close": 139.16,
+        "prev_close": 140.37,
+        "diff_1d": -1.21,
+        "chg_1d_pct": -0.86,
+        "chg_5d_pct": -4.1
+      },
+      {
+        "symbol": "DX-Y.NYB",
+        "name_cn": "美元指数",
+        "group_cn": "汇率与全球流动性",
+        "meaning_cn": "反映美元对主要货币强弱，走强往往压制跨国科技股海外折算收益",
+        "date": "2026-11-25",
+        "close": 104.05,
+        "prev_close": 103.81,
+        "diff_1d": 0.24,
+        "chg_1d_pct": 0.23,
+        "chg_5d_pct": 0.19
+      },
+      {
+        "symbol": "^IRX",
+        "name_cn": "13周美债收益率",
+        "group_cn": "利率与美联储预期",
+        "meaning_cn": "紧贴美联储近期基准利率预期的短端资金利率指标",
+        "date": "2026-11-24",
+        "close": 4.17,
+        "prev_close": 4.15,
+        "diff_1d": 0.02,
+        "chg_1d_pct": 0.51,
+        "chg_5d_pct": 0.72
+      },
+      {
+        "symbol": "^FVX",
+        "name_cn": "5年期美债收益率",
+        "group_cn": "利率与美联储预期",
+        "meaning_cn": "反映市场对未来中期利率路径与信贷成本的定价",
+        "date": "2026-11-24",
+        "close": 4.71,
+        "prev_close": 4.73,
+        "diff_1d": -0.02,
+        "chg_1d_pct": -0.34,
+        "chg_5d_pct": -3.84
+      },
+      {
+        "symbol": "^TNX",
+        "name_cn": "10年期美债收益率",
+        "group_cn": "利率与美联储预期",
+        "meaning_cn": "全球科技股估值折现之锚，收益率上行直接压制高估值成长股",
+        "date": "2026-11-24",
+        "close": 4.9,
+        "prev_close": 4.92,
+        "diff_1d": -0.01,
+        "chg_1d_pct": -0.28,
+        "chg_5d_pct": -3.9
+      },
+      {
+        "symbol": "^TYX",
+        "name_cn": "30年期美债收益率",
+        "group_cn": "利率与美联储预期",
+        "meaning_cn": "反映超长期经济增长、通胀粘性与财政发债供给压力",
+        "date": "2026-11-24",
+        "close": 5.29,
+        "prev_close": 5.29,
+        "diff_1d": -0.0,
+        "chg_1d_pct": -0.04,
+        "chg_5d_pct": -3.04
+      },
+      {
+        "symbol": "GC=F",
+        "name_cn": "纽约黄金期货",
+        "group_cn": "避险与通胀预期",
+        "meaning_cn": "衡量央行购金、地缘避险需求及实际利率预期",
+        "date": "2026-11-25",
+        "close": 3525.1,
+        "prev_close": 3561.9,
+        "diff_1d": -36.8,
+        "chg_1d_pct": -1.03,
+        "chg_5d_pct": -5.79
+      },
+      {
+        "symbol": "CL=F",
+        "name_cn": "纽约原油期货",
+        "group_cn": "避险与通胀预期",
+        "meaning_cn": "衡量能源通胀输入压力与全球工业活动景气度",
+        "date": "2026-11-25",
+        "close": 80.24,
+        "prev_close": 82.05,
+        "diff_1d": -1.81,
+        "chg_1d_pct": -2.21,
+        "chg_5d_pct": -3.63
+      },
+      {
+        "symbol": "BTC-USD",
+        "name_cn": "比特币价格",
+        "group_cn": "流动性与风险偏好",
+        "meaning_cn": "全天候交易的高弹性风险资产，反映全球投机流动性松紧",
+        "date": "2026-11-25",
+        "close": 58793.39,
+        "prev_close": 59747.77,
+        "diff_1d": -954.38,
+        "chg_1d_pct": -1.6,
+        "chg_5d_pct": -0.01
+      },
+      {
+        "symbol": "^RUT",
+        "name_cn": "罗素2000小盘股指数",
+        "group_cn": "跨市场广度与轮动",
+        "meaning_cn": "反映美国本土中小市值企业表现及内需风险偏好",
+        "date": "2026-11-24",
+        "close": 2684.94,
+        "prev_close": 2669.66,
+        "diff_1d": 15.28,
+        "chg_1d_pct": 0.57,
+        "chg_5d_pct": -0.63
+      },
+      {
+        "symbol": "^DJI",
+        "name_cn": "道琼斯工业平均指数",
+        "group_cn": "跨市场广度与轮动",
+        "meaning_cn": "反映传统工业、金融与消费蓝筹股表现，用于对比科技与价值轮动",
+        "date": "2026-11-24",
+        "close": 50018.7,
+        "prev_close": 49595.31,
+        "diff_1d": 423.39,
+        "chg_1d_pct": 0.85,
+        "chg_5d_pct": -1.46
+      },
+      {
+        "symbol": "HYG",
+        "name_cn": "高收益公司债基金",
+        "group_cn": "债市信用风险偏好",
+        "meaning_cn": "代表高风险企业信用债价格，走强意味着资金愿意承担信用风险",
+        "date": "2026-11-24",
+        "close": 76.43,
+        "prev_close": 76.52,
+        "diff_1d": -0.09,
+        "chg_1d_pct": -0.12,
+        "chg_5d_pct": -0.26
+      },
+      {
+        "symbol": "TLT",
+        "name_cn": "20年期以上长端美债基金",
+        "group_cn": "债市信用风险偏好",
+        "meaning_cn": "代表长期国债避险资产价格，与高收益债比值可量化风险偏好",
+        "date": "2026-11-24",
+        "close": 81.49,
+        "prev_close": 81.69,
+        "diff_1d": -0.2,
+        "chg_1d_pct": -0.24,
+        "chg_5d_pct": 2.44
+      }
+    ],
+    "errors": []
+  },
+  "official_sources": {
+    "采集原则": "仅收录美联储、纽约联储、美国联邦公报、美国商务部工业与安全局、美国贸易代表办公室、美国经济分析局、欧洲央行及美国证监会法定公告，严禁混入未经官方证实的市场传闻。",
+    "nyfed_rates": [
+      {
+        "type": "EFFR",
+        "name_cn": "联邦基金有效利率（EFFR）",
+        "effective_date": "2026-11-23",
+        "rate_pct": 3.88,
+        "volume_billions": 87
+      },
+      {
+        "type": "OBFR",
+        "name_cn": "隔夜银行融资利率（OBFR）",
+        "effective_date": "2026-11-23",
+        "rate_pct": 3.88,
+        "volume_billions": 192
+      },
+      {
+        "type": "TGCR",
+        "name_cn": "三方一般抵押品利率（TGCR）",
+        "effective_date": "2026-11-23",
+        "rate_pct": 3.9,
+        "volume_billions": 1230
+      },
+      {
+        "type": "BGCR",
+        "name_cn": "广义一般抵押品利率（BGCR）",
+        "effective_date": "2026-11-23",
+        "rate_pct": 3.9,
+        "volume_billions": 1268
+      },
+      {
+        "type": "SOFR",
+        "name_cn": "担保隔夜融资利率（SOFR）",
+        "effective_date": "2026-11-23",
+        "rate_pct": 3.92,
+        "volume_billions": 3173
+      }
+    ],
+    "fed_monetary_and_speeches": [
+      {
+        "source_cn": "美联储货币政策官方公报",
+        "date": "2026-11-24",
+        "title_raw": "Minutes of the Board's discount rate meetings on October 19 and October 28, 2026",
+        "description_raw": "Minutes of the Board&#39;s discount rate meetings on October 19 and October 28, 2026",
+        "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261124a.htm"
+      },
+      {
+        "source_cn": "美联储货币政策官方公报",
+        "date": "2026-11-18",
+        "title_raw": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
+        "description_raw": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
+        "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm"
+      },
+      {
+        "source_cn": "美联储货币政策官方公报",
+        "date": "2026-11-12",
+        "title_raw": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
+        "description_raw": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
+        "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261112a.htm"
+      },
+      {
+        "source_cn": "美联储货币政策官方公报",
+        "date": "2026-10-28",
+        "title_raw": "Federal Reserve issues FOMC statement",
+        "description_raw": "Federal Reserve issues FOMC statement",
+        "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm"
+      },
+      {
+        "source_cn": "美联储货币政策官方公报",
+        "date": "2026-10-13",
+        "title_raw": "Minutes of the Board's discount rate meetings on August 17, September 9, and September 16, 2026",
+        "description_raw": "Minutes of the Board&#39;s discount rate meetings on August 17, September 9, and September 16, 2026",
+        "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261013a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-20",
+        "title_raw": "Cook, The U.S. Economy in Global Context",
+        "description_raw": "Speech At the XXIX Annual Conference of the Central Bank of Chile, Santiago, Chile",
+        "link": "https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-20",
+        "title_raw": "Waller, Opening Remarks",
+        "description_raw": "Speech At the 2026 College Fed Challenge Finals, Board of Governors of the Federal Reserve System, Washington, D.C.",
+        "link": "https://www.federalreserve.gov/newsevents/speech/waller20261120a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-19",
+        "title_raw": "Jefferson, Monetary Policy amid Frequent and Complex Shocks",
+        "description_raw": "Speech At the International Monetary Fund and Central Bank of Brazil Conference “A Quarter Century of Inflation Targeting in Latin America:  Progress, Challenges, and the Road Ahead,” Bras&iacute;lia, Brazil",
+        "link": "https://www.federalreserve.gov/newsevents/speech/jefferson20261119a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-18",
+        "title_raw": "Barr, Investing in America’s Underserved Communities",
+        "description_raw": "Speech At Making Missing Markets: Catalyzing Capital and Igniting Innovation, Federal Reserve Bank of New York, New York, New York",
+        "link": "https://www.federalreserve.gov/newsevents/speech/barr20261118a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-17",
+        "title_raw": "Waller, Considerations at the Intersection of Payments and Tokenized Markets",
+        "description_raw": "Speech At “Navigating the Future of Banking and Payments,” The Clearing House Annual Conference 2026, New York, New York",
+        "link": "https://www.federalreserve.gov/newsevents/speech/waller20261117a.htm"
+      },
+      {
+        "source_cn": "美联储官员正式演讲稿",
+        "date": "2026-11-16",
+        "title_raw": "Warsh, Opening Remarks",
+        "description_raw": "Speech At the Productivity and Jobs Task Force Conference, hosted by the Federal Reserve Board and the Federal Reserve Bank of San Francisco, San Francisco, California",
+        "link": "https://www.federalreserve.gov/newsevents/speech/warsh20261116a.htm"
+      }
+    ],
+    "federal_register_trade_tech": [
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-25",
+        "doc_type": "Rule",
+        "title_raw": "Additions to the Entity List",
+        "abstract_raw": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 7 entities to the Entity List, under the destinations of Malaysia, Singapore, and Thailand. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+        "link": "https://www.federalregister.gov/documents/2026/11/25/2026-23999/additions-to-the-entity-list"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-23",
+        "doc_type": "Notice",
+        "title_raw": "Agency Information Collection Activities; Submission to the Office of Management and Budget (OMB) for Review and Approval; Comment Request; Additional Protocol Report Forms",
+        "abstract_raw": "The Department of Commerce, in accordance with the Paperwork Reduction Act of 1995 (PRA), invites the general public and other Federal agencies to comment on proposed, and continuing information collections, which helps us assess the impact of our information collection requirements and minimize the public's reporting burden. The purpose of this notice is to allow for 60 days of public comment preceding submission of the collection to OMB.",
+        "link": "https://www.federalregister.gov/documents/2026/11/23/2026-23758/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-omb-for"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-19",
+        "doc_type": "Rule",
+        "title_raw": "Addressing Remote Access to Advanced Semiconductors",
+        "abstract_raw": "In this interim final rule (IFR), the Department of Commerce is establishing new rules to prevent certain foreign actors from leveraging advanced computing power based on U.S. technology to threaten U.S. national security and foreign policy interests. First, this rule establishes new restrictions which will apply for exports, reexports, or transfers (in-country) to overseas data centers that remotely supply significant volumes of compute to companies headquartered in Country Group D:5 or Macau. These restrictions will undermine the ability of companies headquartered in countries of concern from using U.S. advanced Super Intelligence (SI) semiconductors to train advanced SI models. Data centers, foreign foundries, and chip exporters are required to perform robust due diligence on their customers, including any direct or indirect ownership or control by persons in Country Group D:5 or Macau, as part of complying with this new control. The license requirement will not apply to commercial recommender systems, such as those used by online retailers or social media companies, as these functions do not pose the same national security threat. Second, in addition to the current license requirements for advanced semiconductors, a license will be required to export, reexport, or transfer (in-country) advanced semiconductors to Indonesia, Malaysia, Singapore, Thailand, or Brazil (and any additional country designated by the Secretary of Commerce, in consultation with the Secretary of State or the Assistant to the President for National Security Affairs)--countries which present a higher-than-normal risk of diversion. The license requirement for these five countries will not apply to semiconductors destined to companies headquartered in, or whose ultimate parent company is headquartered in, the United States, provided certain reporting requirements are met. Commerce will be actively monitoring for countries that tolerate evasion of this IFR and will consider a range of consequences for such countries, such as import restrictions, new license requirements on advanced semiconductor exports, downgrading the country's status in the U.S. export control regime, and Entity List designations and temporary export prohibitions for foreign persons involved in such activities. Third, this IFR amends the presumptions which front-end chips fabricators and chip packagers face when exporting advanced-node logic chips. These amendments reduce the number of pathways to overcome the presumptions for chip designers located in destinations which face a license requirement for SI chips. This change gives the U.S. government critical oversight over companies headquartered in certain countries that seek to leverage advanced semiconductor production capabilities in third countries. Finally, the IFR formally rescinds the regulations implementing the Biden-era AI Diffusion Rule. The AI Diffusion Rule has never been enforced. The regulatory changes in this rule formalize the rescission of the AI Diffusion Rule, which the Department of Commerce Bureau of Industry and Security (BIS) announced in May 2025.",
+        "link": "https://www.federalregister.gov/documents/2026/11/19/2026-23529/addressing-remote-access-to-advanced-semiconductors"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-18",
+        "doc_type": "Notice",
+        "title_raw": "Applications for Inclusion on the Binational Panels Roster Under the United States-Mexico-Canada Agreement",
+        "abstract_raw": "The United States-Mexico-Canada Agreement (USMCA) provides for the establishment of a roster of individuals to serve on binational panels convened to review final determinations in antidumping or countervailing duty (AD/CVD) proceedings and amendments to AD/CVD statutes of a USMCA Party. The United States annually renews its selections for the roster. USTR invites applications from eligible individuals wishing to be included on the roster for the period April 1, 2027, through March 31, 2028.",
+        "link": "https://www.federalregister.gov/documents/2026/11/18/2026-23412/applications-for-inclusion-on-the-binational-panels-roster-under-the-united-states-mexico-canada"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-10",
+        "doc_type": "Notice",
+        "title_raw": "Notice of Product Exclusion Extensions: China's Acts, Policies, and Practices Related to Technology Transfer, Intellectual Property, and Innovation",
+        "abstract_raw": "In prior notices, the U.S. Trade Representative (Trade Representative) modified the actions in the Section 301 investigation of China's acts, policies, and practices related to technology transfer, intellectual property, and innovation by excluding from additional duties certain products of China. While most exclusions have expired in prior years, certain exclusions remain in force. This notice announces the Trade Representative's determination to further extend all 178 current exclusions.",
+        "link": "https://www.federalregister.gov/documents/2026/11/10/2026-22925/notice-of-product-exclusion-extensions-chinas-acts-policies-and-practices-related-to-technology"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-10",
+        "doc_type": "Notice",
+        "title_raw": "Notice of Determination To Extend Section 301 Investigation of Vietnam's Acts, Policies, and Practices Related to Intellectual Property Protection and Enforcement",
+        "abstract_raw": "The United States Trade Representative (Trade Representative) has determined to extend for three months the ongoing Section 301 investigation of certain acts, policies, and practices of the Government of Vietnam related to intellectual property (IP) protection and enforcement.",
+        "link": "https://www.federalregister.gov/documents/2026/11/10/2026-22868/notice-of-determination-to-extend-section-301-investigation-of-vietnams-acts-policies-and-practices"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-10",
+        "doc_type": "Notice",
+        "title_raw": "Notice of Modification of Section 301 Action: China's Targeting of the Maritime, Logistics, and Shipbuilding Sectors for Dominance",
+        "abstract_raw": "To allow for further discussion with China regarding the acts, policies, and practices at issue in this investigation, the U.S. Trade Representative (Trade Representative) is modifying the action taken in this investigation to further suspend that action for two months, until January 10, 2027.",
+        "link": "https://www.federalregister.gov/documents/2026/11/10/2026-22867/notice-of-modification-of-section-301-action-chinas-targeting-of-the-maritime-logistics-and"
+      },
+      {
+        "source_cn": "美国联邦公报（商务部与贸易代表办公室法定文件）",
+        "date": "2026-11-09",
+        "doc_type": "Rule",
+        "title_raw": "Extension of the Suspension of Expansion of End-User Controls for Affiliates of Certain Listed Entities",
+        "abstract_raw": "The Bureau of Industry and Security (BIS) is extending the suspension of the interim final rule (IFR), \"Expansion of End-User Controls to Cover Affiliates of Certain Listed Entities.\" The suspension was set to end November 9, 2026. This final rule extends the suspension through January 10, 2027.",
+        "link": "https://www.federalregister.gov/documents/2026/11/09/2026-22793/extension-of-the-suspension-of-expansion-of-end-user-controls-for-affiliates-of-certain-listed"
+      }
+    ],
+    "ustr_and_bea_releases": [
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-19",
+        "title_raw": "United States Seeks Mexico’s Review of Alleged Denial of Workers’ Rights at Polygroup Industrias México",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/united-states-seeks-mexicos-review-alleged-denial-workers-rights-polygroup-industrias-mexico"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-18",
+        "title_raw": "Ambassador Greer Champions America First Trade Policy in Virtual Remarks for the Responsible Business Alliance’s Annual Conference",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/ambassador-greer-champions-america-first-trade-policy-virtual-remarks-responsible-business-alliances"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-16",
+        "title_raw": "Ambassador Greer Pens Letter to the Editor of the Wall Street Journal on how Tariffs are Advancing Americans’ Long-Term Prosperity",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/ambassador-greer-pens-letter-editor-wall-street-journal-how-tariffs-are-advancing-americans-long"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-13",
+        "title_raw": "United States Seeks Mexico’s Review of Alleged Denial of Workers’ Rights at Industrias FG",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/united-states-seeks-mexicos-review-alleged-denial-workers-rights-industrias-fg"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-06",
+        "title_raw": "Readout of Ambassador Greer’s Call with China’s Vice Premier He Lifeng",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/readout-ambassador-greers-call-chinas-vice-premier-he-lifeng"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-02",
+        "title_raw": "United States Seeks Mexico’s Review of Alleged Denial of Workers’ Rights at Madobox",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/united-states-seeks-mexicos-review-alleged-denial-workers-rights-madobox"
+      },
+      {
+        "source_cn": "美国贸易代表办公室（USTR）",
+        "date": "2026-11-02",
+        "title_raw": "United States and Mexico Announce Memorandum of Understanding at Industrias Tecnos Facility",
+        "link": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/united-states-and-mexico-announce-memorandum-understanding-industrias-tecnos-facility"
+      },
+      {
+        "source_cn": "美国经济分析局（BEA）",
+        "date": "2026-11-20",
+        "title_raw": "Activities of U.S. Multinational Enterprises, 2024",
+        "link": "https://www.bea.gov/news/2026/activities-us-multinational-enterprises-2024"
+      },
+      {
+        "source_cn": "美国经济分析局（BEA）",
+        "date": "2026-11-18",
+        "title_raw": "Outdoor Recreation Economic Statistics, U.S. and States, 2025",
+        "link": "https://www.bea.gov/news/2026/outdoor-recreation-economic-statistics-us-and-states-2025"
+      },
+      {
+        "source_cn": "美国经济分析局（BEA）",
+        "date": "2026-11-04",
+        "title_raw": "U.S. International Trade in Goods and Services, September 2026",
+        "link": "https://www.bea.gov/news/2026/us-international-trade-goods-and-services-september-2026"
+      },
+      {
+        "source_cn": "美国经济分析局（BEA）",
+        "date": "2026-10-29",
+        "title_raw": "GDP (Advance Estimate), 3rd Quarter 2026",
+        "link": "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026"
+      },
+      {
+        "source_cn": "美国经济分析局（BEA）",
+        "date": "2026-10-29",
+        "title_raw": "Personal Income and Outlays, September 2026",
+        "link": "https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026"
+      }
+    ],
+    "ecb_releases": [
+      {
+        "source_cn": "欧洲中央银行官方公报",
+        "date": "2026-11-24",
+        "title_raw": "Boris Vujčić: Resilience in an age of shocks: lessons from central and eastern Europe",
+        "link": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261124~17928e5456.en.html"
+      },
+      {
+        "source_cn": "欧洲中央银行官方公报",
+        "date": "2026-11-23",
+        "title_raw": "Philip R. Lane: Climate change and monetary policy",
+        "link": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261123~b5816801a0.en.pdf"
+      },
+      {
+        "source_cn": "欧洲中央银行官方公报",
+        "date": "2026-11-23",
+        "title_raw": "ECB expands acceptance of DLT-based assets as eligible Eurosystem collateral",
+        "link": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261123~76b6f57b74.en.html"
+      },
+      {
+        "source_cn": "欧洲中央银行官方公报",
+        "date": "2026-11-20",
+        "title_raw": "Christine Lagarde: Acting in time",
+        "link": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261120~e52bcc4db2.en.html"
+      },
+      {
+        "source_cn": "欧洲中央银行官方公报",
+        "date": "2026-11-18",
+        "title_raw": "Boris Vujčić: Financial Stability Review - November 2026",
+        "link": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261118~86f1e8147e.en.pdf"
+      }
+    ],
+    "sec_8k_filings": [
+      {
+        "symbol": "QCOM",
+        "name_cn": "高通",
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "item_codes": [
+          "5.02",
+          "9.01"
+        ],
+        "items_cn": "董事或核心高级管理人员离任、复职或新任变动",
+        "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432826000138/qcom-20261120.htm"
+      },
+      {
+        "symbol": "GOOGL",
+        "name_cn": "谷歌母公司",
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "item_codes": [
+          "8.01",
+          "9.01"
+        ],
+        "items_cn": "公司主动披露的其他法定重大事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526475973/d91615d8k.htm"
+      },
+      {
+        "symbol": "CRWD",
+        "name_cn": "众击安全",
+        "filing_date": "2026-11-24",
+        "form": "425",
+        "item_codes": [
+          "425"
+        ],
+        "items_cn": "上市公司重大换股并购或合并事项法定披露文件",
+        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000110465926131630/tm2630454d19_425.htm"
+      },
+      {
+        "symbol": "NVDA",
+        "name_cn": "英伟达",
+        "filing_date": "2026-11-23",
+        "form": "8-K",
+        "item_codes": [
+          "5.02",
+          "9.01"
+        ],
+        "items_cn": "董事或核心高级管理人员离任、复职或新任变动",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm"
+      },
+      {
+        "symbol": "META",
+        "name_cn": "脸书母公司",
+        "filing_date": "2026-11-23",
+        "form": "8-K",
+        "item_codes": [
+          "8.01"
+        ],
+        "items_cn": "公司主动披露的其他法定重大事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026075541/meta-20261118.htm"
+      },
+      {
+        "symbol": "CRWD",
+        "name_cn": "众击安全",
+        "filing_date": "2026-11-23",
+        "form": "425",
+        "item_codes": [
+          "425"
+        ],
+        "items_cn": "上市公司重大换股并购或合并事项法定披露文件",
+        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000110465926131201/tm2630454d11_425.htm"
+      },
+      {
+        "symbol": "CRWD",
+        "name_cn": "众击安全",
+        "filing_date": "2026-11-23",
+        "form": "8-K",
+        "item_codes": [
+          "1.01",
+          "7.01",
+          "9.01"
+        ],
+        "items_cn": "签署重大具有法律约束力的协议（如并购或战略合作）；依据公平披露准则发布的官方投资者沟通文件",
+        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000110465926130785/tm2630454d1_8k.htm"
+      },
+      {
+        "symbol": "CRWD",
+        "name_cn": "众击安全",
+        "filing_date": "2026-11-23",
+        "form": "8-K",
+        "item_codes": [
+          "2.02",
+          "9.01"
+        ],
+        "items_cn": "正式披露季度或年度经营业绩与财务状况",
+        "url": "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000035/crwd-20261123.htm"
+      },
+      {
+        "symbol": "AMD",
+        "name_cn": "超威半导体",
+        "filing_date": "2026-11-20",
+        "form": "8-K",
+        "item_codes": [
+          "5.03",
+          "9.01"
+        ],
+        "items_cn": "修订公司章程或治理细则",
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000218/amd-20261118.htm"
+      },
+      {
+        "symbol": "PANW",
+        "name_cn": "派拓网络",
+        "filing_date": "2026-11-18",
+        "form": "8-K",
+        "item_codes": [
+          "2.02",
+          "3.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "items_cn": "正式披露季度或年度经营业绩与财务状况；未注册股权证券发行事项；依据公平披露准则发布的官方投资者沟通文件；公司主动披露的其他法定重大事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/1327567/000132756726000030/panw-20261117.htm"
+      },
+      {
+        "symbol": "NVDA",
+        "name_cn": "英伟达",
+        "filing_date": "2026-11-17",
+        "form": "8-K",
+        "item_codes": [
+          "2.02",
+          "9.01"
+        ],
+        "items_cn": "正式披露季度或年度经营业绩与财务状况",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/nvda-20261117.htm"
+      },
+      {
+        "symbol": "AMD",
+        "name_cn": "超威半导体",
+        "filing_date": "2026-11-16",
+        "form": "8-K/A",
+        "item_codes": [
+          "3.02"
+        ],
+        "items_cn": "未注册股权证券发行事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000119312526462340/d105780d8ka.htm"
+      },
+      {
+        "symbol": "QCOM",
+        "name_cn": "高通",
+        "filing_date": "2026-11-13",
+        "form": "8-K",
+        "item_codes": [
+          "1.01",
+          "8.01",
+          "9.01"
+        ],
+        "items_cn": "签署重大具有法律约束力的协议（如并购或战略合作）；公司主动披露的其他法定重大事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/804328/000110465926127163/tm2629667d1_8k.htm"
+      },
+      {
+        "symbol": "NVDA",
+        "name_cn": "英伟达",
+        "filing_date": "2026-11-12",
+        "form": "8-K",
+        "item_codes": [
+          "5.02",
+          "9.01"
+        ],
+        "items_cn": "董事或核心高级管理人员离任、复职或新任变动",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm"
+      },
+      {
+        "symbol": "META",
+        "name_cn": "脸书母公司",
+        "filing_date": "2026-11-12",
+        "form": "8-K",
+        "item_codes": [
+          "8.01",
+          "9.01"
+        ],
+        "items_cn": "公司主动披露的其他法定重大事项",
+        "url": "https://www.sec.gov/Archives/edgar/data/1326801/000119312526458525/d177728d8k.htm"
+      }
+    ],
+    "errors": []
+  }
+}
