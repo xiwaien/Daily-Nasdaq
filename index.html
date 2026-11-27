@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>美股纳斯达克科技与美债利差交互投研门户</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0b0f19;
+      color: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .portal-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .portal-frame {
+      flex: 1;
+      width: 100%;
+      border: 0;
+      background-color: #0b0f19;
+    }
+  </style>
+</head>
+<body>
+  <div class="portal-shell">
+    <nav class="bg-[#111827] border-b border-[#1f2937] px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="px-2 py-0.5 rounded text-xs font-bold bg-[#3b82f6] text-white">投研总门户</span>
+        <span class="text-sm font-bold">纳斯达克核心科技股与美债宏观交互看板中心</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <button id="tab-daily" class="px-3 py-1.5 rounded-lg font-semibold border border-[#3b82f6] bg-[#3b82f6] text-white transition">
+          每日纳斯达克科技看板
+        </button>
+        <button id='tab-spread' class='px-3 py-1.5 rounded-lg font-semibold border border-[#1f2937] bg-[#0b0f19] text-[#9ca3af] hover:text-white transition'>美债长短期期限利差看板</button>
+
+        <div id="date-picker-wrap" class="flex items-center gap-1.5 ml-1">
+          <label for="date-select" class="text-[#9ca3af]">交易日期：</label>
+          <select id="date-select" class="bg-[#0b0f19] border border-[#1f2937] text-[#f3f4f6] rounded-lg px-2.5 py-1 focus:outline-none">
+            <option value="2026-11-25.html">2026-11-25（最新收盘）</option>
+            <option value="2026-11-24.html">2026-11-24</option>
+            <option value="2026-11-23.html">2026-11-23</option>
+            <option value="2026-11-19.html">2026-11-19</option>
+          </select>
+        </div>
+      </div>
+    </nav>
+
+    <iframe id="main-frame" class="portal-frame" src="2026-11-25.html" title="投研交互看板视图"></iframe>
+  </div>
+
+  <script>
+    const frame = document.getElementById("main-frame");
+    const tabDaily = document.getElementById("tab-daily");
+    const tabSpread = document.getElementById("tab-spread");
+    const dateSelect = document.getElementById("date-select");
+    const dateWrap = document.getElementById("date-picker-wrap");
+
+    function setActiveTab(mode) {
+      if (mode === "daily") {
+        tabDaily.className = "px-3 py-1.5 rounded-lg font-semibold border border-[#3b82f6] bg-[#3b82f6] text-white transition";
+        if (tabSpread) {
+          tabSpread.className = "px-3 py-1.5 rounded-lg font-semibold border border-[#1f2937] bg-[#0b0f19] text-[#9ca3af] hover:text-white transition";
+        }
+        dateWrap.style.display = "flex";
+        frame.src = dateSelect.value;
+      } else {
+        if (tabSpread) {
+          tabSpread.className = "px-3 py-1.5 rounded-lg font-semibold border border-[#3b82f6] bg-[#3b82f6] text-white transition";
+        }
+        tabDaily.className = "px-3 py-1.5 rounded-lg font-semibold border border-[#1f2937] bg-[#0b0f19] text-[#9ca3af] hover:text-white transition";
+        dateWrap.style.display = "none";
+        frame.src = "美债期限利差看板.html";
+      }
+    }
+
+    tabDaily.addEventListener("click", () => setActiveTab("daily"));
+    if (tabSpread) {
+      tabSpread.addEventListener("click", () => setActiveTab("spread"));
+    }
+    dateSelect.addEventListener("change", () => {
+      setActiveTab("daily");
+    });
+  </script>
+</body>
+</html>
